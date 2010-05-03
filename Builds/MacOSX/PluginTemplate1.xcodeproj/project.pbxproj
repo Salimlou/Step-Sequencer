@@ -68,7 +68,7 @@
 		C930B128118E7B53005CD760 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		C930B149118E7C95005CD760 /* PluginTemplate1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PluginTemplate1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C930B14B118E7C95005CD760 /* Standalone-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Standalone-Info.plist"; sourceTree = "<group>"; };
-		D33D082C0DB010E0AB2BE898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		D33D082C0DB010E0AB2BE898 /* Plugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Plugin-Info.plist"; sourceTree = "<group>"; };
 		D9AECD02FA3BF8873B8969C4 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		E3C7EB89E3DDEFCBD0047DB6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F159AA2ADC88D6E0DB8D351A /* PluginTemplate1.component */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PluginTemplate1.component; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,16 +129,15 @@
 			children = (
 				E419DE97A045DE82307A69FF /* Source */,
 				09D7D206455458BF9A5BEC46 /* Juce VST Wrapper */,
-				C930B106118E7A40005CD760 /* Standalone */,
+				C930B106118E7A40005CD760 /* Juce Standalone Wrapper */,
 				C93C02ED18FC4A72960B422A /* Resources */,
 				ECDBB8B1FF65EC6B06590D7C /* Frameworks */,
 				F7E0863D5E955792E05E41D8 /* Products */,
-				C930B14B118E7C95005CD760 /* Standalone-Info.plist */,
 			);
 			name = Source;
 			sourceTree = "<group>";
 		};
-		C930B106118E7A40005CD760 /* Standalone */ = {
+		C930B106118E7A40005CD760 /* Juce Standalone Wrapper */ = {
 			isa = PBXGroup;
 			children = (
 				C930B107118E7A40005CD760 /* juce_AudioFilterStreamer.cpp */,
@@ -146,15 +145,15 @@
 				C930B109118E7A40005CD760 /* juce_StandaloneFilterWindow.cpp */,
 				C930B10A118E7A40005CD760 /* juce_StandaloneFilterWindow.h */,
 			);
-			name = Standalone;
+			name = "Juce Standalone Wrapper";
 			path = "../../../../juce/extras/audio plugins/wrapper/Standalone";
 			sourceTree = SOURCE_ROOT;
 		};
 		C930B11C118E7B53005CD760 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				C930B11D118E7B53005CD760 /* PluginProcessor.cpp */,
 				C930B11E118E7B53005CD760 /* PluginProcessor.h */,
+				C930B11D118E7B53005CD760 /* PluginProcessor.cpp */,
 			);
 			name = Audio;
 			path = ../../Source/Audio;
@@ -163,8 +162,8 @@
 		C930B11F118E7B53005CD760 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C930B120118E7B53005CD760 /* PluginEditor.cpp */,
 				C930B121118E7B53005CD760 /* PluginEditor.h */,
+				C930B120118E7B53005CD760 /* PluginEditor.cpp */,
 			);
 			name = Components;
 			path = ../../Source/Components;
@@ -174,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				C930B123118E7B53005CD760 /* AppConfig.h */,
-				C930B124118E7B53005CD760 /* JuceApp.cpp */,
 				C930B125118E7B53005CD760 /* JuceApp.h */,
+				C930B124118E7B53005CD760 /* JuceApp.cpp */,
 				C930B126118E7B53005CD760 /* JuceHeader.h */,
 				C930B127118E7B53005CD760 /* JucePluginCharacteristics.h */,
 				C930B128118E7B53005CD760 /* Main.cpp */,
@@ -187,7 +186,8 @@
 		C93C02ED18FC4A72960B422A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D33D082C0DB010E0AB2BE898 /* Info.plist */,
+				C930B14B118E7C95005CD760 /* Standalone-Info.plist */,
+				D33D082C0DB010E0AB2BE898 /* Plugin-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../juce\"",
 				);
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "Plugin-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -438,7 +438,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../juce\"",
 				);
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "Plugin-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/Components/";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
