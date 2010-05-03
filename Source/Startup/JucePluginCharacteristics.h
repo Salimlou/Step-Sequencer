@@ -44,6 +44,8 @@
 #define JucePlugin_RTASManufacturerCode JucePlugin_ManufacturerCode
 #define JucePlugin_RTASProductId        JucePlugin_PluginCode
 #define JUCE_USE_VSTSDK_2_4             1
-#define JUCE_ObjCExtraSuffix            "sttp"
+#ifndef JUCE_ObjCExtraSuffix
+	#define JUCE_ObjCExtraSuffix            "sttp"
+#endif
 
 #endif   // __PLUGINCHARACTERISTICS_AD12B381__
