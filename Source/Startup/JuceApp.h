@@ -1,6 +1,6 @@
 /*
  *  JuceApp.h
- *  template1
+ *  plugin_template1
  *
  *  Created by Matt Sonic on 3/27/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.

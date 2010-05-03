@@ -15,8 +15,8 @@
 #define JucePlugin_Build_AU     0
 #define JucePlugin_Build_RTAS   0
 
-#define JucePlugin_Name                 "PluginTemplate1"
-#define JucePlugin_Desc                 "PluginTemplate1"
+#define JucePlugin_Name                 "plugin_template1"
+#define JucePlugin_Desc                 "plugin_template1"
 #define JucePlugin_Manufacturer         "SonicTransfer"
 #define JucePlugin_ManufacturerCode     'stpt'
 #define JucePlugin_PluginCode           'Stpt'
