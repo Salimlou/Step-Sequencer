@@ -7,36 +7,36 @@
  *
  */
 
+#include "MainComponent.h"
 #include "PluginAudioProcessor.h"
 
 #include "PluginAudioProcessorEditor.h"
 
 PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor* ownerFilter) : 
 AudioProcessorEditor (ownerFilter),
-resizer (0)
+resizer (0),
+mainComponent (0)
 {
+	addAndMakeVisible (mainComponent = new MainComponent());
+
 	resizeLimits.setSizeLimits (600, 400, 1200, 800);
 	addAndMakeVisible (resizer = new ResizableCornerComponent (this, &resizeLimits));
-    
+	
 	setSize (600, 400);
 }
 
 PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 {
+	deleteAllChildren();
 }
 
 // Component methods
 void PluginAudioProcessorEditor::paint (Graphics& g)
 {
-    g.fillAll (Colours::white);
-    g.setColour (Colours::black);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!",
-                      0, 0, getWidth(), getHeight(),
-                      Justification::centred, 1);
 }
 
 void PluginAudioProcessorEditor::resized() 
 {
+	mainComponent->setBounds (0, 0, getWidth(), getHeight());
 	resizer->setBounds (getWidth() - 16, getHeight() - 16, 16, 16);
 }

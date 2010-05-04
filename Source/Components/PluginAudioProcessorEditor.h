@@ -14,6 +14,8 @@
 #include "JucePluginCharacteristics.h"
 #include "PluginAudioProcessor.h"
 
+class MainComponent;
+
 class PluginAudioProcessorEditor : public AudioProcessorEditor
 {
 public:
@@ -27,6 +29,7 @@ public:
 private:
 	ResizableCornerComponent* resizer;
 	ComponentBoundsConstrainer resizeLimits;
+	MainComponent* mainComponent;
 };
 
 #endif 

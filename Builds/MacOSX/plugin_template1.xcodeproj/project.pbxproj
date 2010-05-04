@@ -37,6 +37,8 @@
 		C930B41C118E7D31005CD760 /* PluginAudioProcessorEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C930B120118E7B53005CD760 /* PluginAudioProcessorEditor.cpp */; };
 		C930B41D118E7D31005CD760 /* JuceApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C930B124118E7B53005CD760 /* JuceApp.cpp */; };
 		C930B41E118E7D31005CD760 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C930B128118E7B53005CD760 /* Main.cpp */; };
+		C9699D061190B5900062CEEE /* MainComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9699D051190B5900062CEEE /* MainComponent.cpp */; };
+		C9699D131190B62A0062CEEE /* MainComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9699D051190B5900062CEEE /* MainComponent.cpp */; };
 		CA4B0796F9761B49346E67CA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236A3C63C095F3E7D0CAB57 /* QuartzCore.framework */; };
 		F1987FCD17C063C4D768C1F7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4888E03EAF76109DC7ADA97 /* IOKit.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +69,8 @@
 		C930B128118E7B53005CD760 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		C930B149118E7C95005CD760 /* plugin_template1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = plugin_template1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C930B14B118E7C95005CD760 /* Standalone-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Standalone-Info.plist"; sourceTree = "<group>"; };
+		C9699D041190B5900062CEEE /* MainComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainComponent.h; sourceTree = "<group>"; };
+		C9699D051190B5900062CEEE /* MainComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainComponent.cpp; sourceTree = "<group>"; };
 		D33D082C0DB010E0AB2BE898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9AECD02FA3BF8873B8969C4 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		E3C7EB89E3DDEFCBD0047DB6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -163,6 +167,8 @@
 			children = (
 				C930B121118E7B53005CD760 /* PluginAudioProcessorEditor.h */,
 				C930B120118E7B53005CD760 /* PluginAudioProcessorEditor.cpp */,
+				C9699D041190B5900062CEEE /* MainComponent.h */,
+				C9699D051190B5900062CEEE /* MainComponent.cpp */,
 			);
 			name = Components;
 			path = ../../Source/Components;
@@ -323,6 +329,7 @@
 				AB5736AD75AC6084CEF8261A /* juce_VST_Wrapper.mm in Sources */,
 				C930B129118E7B53005CD760 /* PluginAudioProcessor.cpp in Sources */,
 				C930B12A118E7B53005CD760 /* PluginAudioProcessorEditor.cpp in Sources */,
+				C9699D061190B5900062CEEE /* MainComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9699D131190B62A0062CEEE /* MainComponent.cpp in Sources */,
 				C930B419118E7D31005CD760 /* juce_AudioFilterStreamer.cpp in Sources */,
 				C930B41A118E7D31005CD760 /* juce_StandaloneFilterWindow.cpp in Sources */,
 				C930B41B118E7D31005CD760 /* PluginAudioProcessor.cpp in Sources */,
