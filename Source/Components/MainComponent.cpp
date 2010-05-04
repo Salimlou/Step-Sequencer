@@ -7,11 +7,13 @@
  *
  */
 
+#include "PluginAudioProcessor.h"
+
 #include "MainComponent.h"
 
-
-MainComponent::MainComponent() :
-Component ("MainComponent")
+MainComponent::MainComponent (PluginAudioProcessor* pluginAudioProcessor_) :
+Component ("MainComponent"),
+pluginAudioProcessor (pluginAudioProcessor_)
 {
 }
 

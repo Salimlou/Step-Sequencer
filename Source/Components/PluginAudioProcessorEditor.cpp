@@ -17,7 +17,7 @@ AudioProcessorEditor (pluginAudioProcessor),
 resizer (0),
 mainComponent (0)
 {
-	addAndMakeVisible (mainComponent = new MainComponent());
+	addAndMakeVisible (mainComponent = new MainComponent (pluginAudioProcessor));
 
 	resizeLimits.setSizeLimits (600, 400, 1200, 800);
 	addAndMakeVisible (resizer = new ResizableCornerComponent (this, &resizeLimits));

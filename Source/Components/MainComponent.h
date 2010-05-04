@@ -12,15 +12,20 @@
 
 #include "JuceHeader.h"
 
+class PluginAudioProcessor;
+
 class MainComponent : public Component
 {
 public:
-	MainComponent();
+	MainComponent (PluginAudioProcessor* pluginAudioProcessor_);
 	~MainComponent();
 	
 	// Component methods
 	virtual void paint (Graphics& g);
 	virtual void resized();
+
+private:
+	PluginAudioProcessor* pluginAudioProcessor;
 };
 
 #endif
