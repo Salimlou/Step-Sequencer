@@ -12,20 +12,22 @@
 
 #include "JuceHeader.h"
 #include "JucePluginCharacteristics.h"
-#include "PluginAudioProcessor.h"
 
+class PluginAudioProcessor;
 class MainComponent;
 
 class PluginAudioProcessorEditor : public AudioProcessorEditor
 {
 public:
-    PluginAudioProcessorEditor (PluginAudioProcessor* ownerFilter);
+    PluginAudioProcessorEditor (PluginAudioProcessor* pluginAudioProcessor);
     ~PluginAudioProcessorEditor();
+
+    PluginAudioProcessor* getPluginAudioProcessor() const;
 
 	// Component methods
     virtual void paint (Graphics& g);
 	virtual void resized();
-
+	
 private:
 	ResizableCornerComponent* resizer;
 	ComponentBoundsConstrainer resizeLimits;

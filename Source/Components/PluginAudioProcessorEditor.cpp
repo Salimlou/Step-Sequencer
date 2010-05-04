@@ -12,8 +12,8 @@
 
 #include "PluginAudioProcessorEditor.h"
 
-PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor* ownerFilter) : 
-AudioProcessorEditor (ownerFilter),
+PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor* pluginAudioProcessor) : 
+AudioProcessorEditor (pluginAudioProcessor),
 resizer (0),
 mainComponent (0)
 {
@@ -29,6 +29,11 @@ PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 {
 	deleteAllChildren();
 }
+
+PluginAudioProcessor* PluginAudioProcessorEditor::getPluginAudioProcessor() const
+{
+	return static_cast <PluginAudioProcessor*> (getAudioProcessor());
+}	
 
 // Component methods
 void PluginAudioProcessorEditor::paint (Graphics& g)
