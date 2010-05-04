@@ -50,7 +50,16 @@ public:
 
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
-
+	
+	//--------------------------------------------------------------------------
+	enum Parameters {
+		gainParam = 0,
+		
+		totalNumParams
+	};
+	
+	float gain;
+	
     juce_UseDebuggingNewOperator
 };
 

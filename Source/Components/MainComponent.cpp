@@ -13,12 +13,23 @@
 
 MainComponent::MainComponent (PluginAudioProcessor* pluginAudioProcessor_) :
 Component ("MainComponent"),
-pluginAudioProcessor (pluginAudioProcessor_)
+pluginAudioProcessor (pluginAudioProcessor_),
+gainSlider (0)
 {
+	addAndMakeVisible (gainSlider = new Slider ("gain"));
+	gainSlider->setSliderStyle (Slider::LinearVertical);
+	gainSlider->addListener (this);
+	gainSlider->setRange (0.0, 1.0, 0.01);
+	Label* l = new Label ("", "Gain level:");
+	l->attachToComponent (gainSlider, false);
+	l->setFont (Font (11.0f));
+
+	startTimer (50);
 }
 
 MainComponent::~MainComponent()
 {
+	deleteAllChildren();
 }
 
 // Component methods
@@ -34,5 +45,24 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
+	gainSlider->setBounds (getWidth() - 160, 20, 150, getHeight() - 40);
+	
 }
+
+// Timer methods
+void MainComponent::timerCallback()
+{
+	gainSlider->setValue (pluginAudioProcessor->gain, false);
+}
+
+// SliderListener methods
+void MainComponent::sliderValueChanged (Slider* slider)
+{
+	if (slider == gainSlider) {
+		pluginAudioProcessor->setParameterNotifyingHost (PluginAudioProcessor::gainParam, 
+														 (float) gainSlider->getValue());
+	}
+}
+
+
 

@@ -27,26 +27,36 @@ const String PluginAudioProcessor::getName() const
 
 int PluginAudioProcessor::getNumParameters()
 {
-    return 0;
+    return totalNumParams;
 }
 
 float PluginAudioProcessor::getParameter (int index)
 {
-    return 0.0f;
+	switch (index) {
+		case gainParam: return gain;
+		default:        return 0.0f;
+	}
 }
 
 void PluginAudioProcessor::setParameter (int index, float newValue)
 {
+	switch (index) {
+		case gainParam: gain = newValue; break;
+		default:        break;
+	}	
 }
 
 const String PluginAudioProcessor::getParameterName (int index)
 {
-    return String::empty;
+	switch (index) {
+		case gainParam: return "gain";
+		default:        return String::empty;
+	}
 }
 
 const String PluginAudioProcessor::getParameterText (int index)
 {
-    return String::empty;
+    return String (getParameter (index), 2);
 }
 
 const String PluginAudioProcessor::getInputChannelName (const int channelIndex) const
@@ -124,13 +134,10 @@ void PluginAudioProcessor::releaseResources()
 
 void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
     for (int channel = 0; channel < getNumInputChannels(); ++channel)
     {
-        float* channelData = buffer.getSampleData (channel);
-
-        // ..do something to the data...
+        //float* channelData = buffer.getSampleData (channel);
+		buffer.applyGain (channel, 0, buffer.getNumSamples(), gain);
     }
 
     // In case we have more outputs than inputs, we'll clear any output
@@ -152,12 +159,21 @@ void PluginAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+	XmlElement xml ("MYPLUGINSETTINGS");
+	xml.setAttribute ("gain", gain);
+	copyXmlToBinary (xml, destData);
 }
 
 void PluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+	ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+	if (xmlState != 0) {
+		if (xmlState->hasTagName ("MYPLUGINSETTINGS")) {
+			gain = (float) xmlState->getDoubleAttribute ("gain", gain);
+		}
+	}
 }
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()

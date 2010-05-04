@@ -14,7 +14,10 @@
 
 class PluginAudioProcessor;
 
-class MainComponent : public Component
+class MainComponent : 
+public Component,
+public Timer,
+public SliderListener
 {
 public:
 	MainComponent (PluginAudioProcessor* pluginAudioProcessor_);
@@ -24,8 +27,15 @@ public:
 	virtual void paint (Graphics& g);
 	virtual void resized();
 
+	// Timer methods
+	virtual void timerCallback();
+	
+	// SliderListener methods
+	virtual void sliderValueChanged (Slider* slider);
+	
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
+	Slider* gainSlider;
 };
 
 #endif
