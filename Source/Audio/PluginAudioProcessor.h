@@ -13,7 +13,7 @@
 #include "JuceHeader.h"
 #include "JucePluginCharacteristics.h"
 
-class PluginAudioProcessor  : public AudioProcessor
+class PluginAudioProcessor : public AudioProcessor
 {
 public:
     PluginAudioProcessor();

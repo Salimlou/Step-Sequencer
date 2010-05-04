@@ -14,7 +14,7 @@
 #include "JucePluginCharacteristics.h"
 #include "PluginAudioProcessor.h"
 
-class PluginAudioProcessorEditor  : public AudioProcessorEditor
+class PluginAudioProcessorEditor : public AudioProcessorEditor
 {
 public:
     PluginAudioProcessorEditor (PluginAudioProcessor* ownerFilter);
