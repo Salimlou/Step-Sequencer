@@ -60,7 +60,6 @@
 		C930B11E118E7B53005CD760 /* PluginAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginAudioProcessor.h; sourceTree = "<group>"; };
 		C930B120118E7B53005CD760 /* PluginAudioProcessorEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PluginAudioProcessorEditor.cpp; sourceTree = "<group>"; };
 		C930B121118E7B53005CD760 /* PluginAudioProcessorEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginAudioProcessorEditor.h; sourceTree = "<group>"; };
-		C930B123118E7B53005CD760 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		C930B124118E7B53005CD760 /* JuceApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JuceApp.cpp; sourceTree = "<group>"; };
 		C930B125118E7B53005CD760 /* JuceApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JuceApp.h; sourceTree = "<group>"; };
 		C930B126118E7B53005CD760 /* JuceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JuceHeader.h; sourceTree = "<group>"; };
@@ -172,7 +171,6 @@
 		C930B122118E7B53005CD760 /* Startup */ = {
 			isa = PBXGroup;
 			children = (
-				C930B123118E7B53005CD760 /* AppConfig.h */,
 				C930B125118E7B53005CD760 /* JuceApp.h */,
 				C930B124118E7B53005CD760 /* JuceApp.cpp */,
 				C930B126118E7B53005CD760 /* JuceHeader.h */,

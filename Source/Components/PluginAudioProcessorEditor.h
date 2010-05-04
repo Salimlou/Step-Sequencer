@@ -20,7 +20,13 @@ public:
     PluginAudioProcessorEditor (PluginAudioProcessor* ownerFilter);
     ~PluginAudioProcessorEditor();
 
-    void paint (Graphics& g);
+	// Component methods
+    virtual void paint (Graphics& g);
+	virtual void resized();
+
+private:
+	ResizableCornerComponent* resizer;
+	ComponentBoundsConstrainer resizeLimits;
 };
 
 #endif 

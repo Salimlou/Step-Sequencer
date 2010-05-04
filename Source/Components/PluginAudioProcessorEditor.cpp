@@ -12,15 +12,20 @@
 #include "PluginAudioProcessorEditor.h"
 
 PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor* ownerFilter) : 
-AudioProcessorEditor (ownerFilter)
+AudioProcessorEditor (ownerFilter),
+resizer (0)
 {
-    setSize (400, 300);
+	resizeLimits.setSizeLimits (600, 400, 1200, 800);
+	addAndMakeVisible (resizer = new ResizableCornerComponent (this, &resizeLimits));
+    
+	setSize (600, 400);
 }
 
 PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 {
 }
 
+// Component methods
 void PluginAudioProcessorEditor::paint (Graphics& g)
 {
     g.fillAll (Colours::white);
@@ -29,4 +34,9 @@ void PluginAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText ("Hello World!",
                       0, 0, getWidth(), getHeight(),
                       Justification::centred, 1);
+}
+
+void PluginAudioProcessorEditor::resized() 
+{
+	resizer->setBounds (getWidth() - 16, getHeight() - 16, 16, 16);
 }
