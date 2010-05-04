@@ -15,12 +15,12 @@
 class MainComponent : public Component
 {
 public:
-  MainComponent();
-  ~MainComponent();
-
-  // Component methods
-  virtual void paint (Graphics& g);
-  virtual void resized();
+	MainComponent();
+	~MainComponent();
+	
+	// Component methods
+	virtual void paint (Graphics& g);
+	virtual void resized();
 };
 
 #endif
