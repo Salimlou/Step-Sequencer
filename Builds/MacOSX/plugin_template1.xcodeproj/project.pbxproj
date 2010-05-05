@@ -152,14 +152,14 @@
 			path = "../../../../../juce/extras/audio plugins/wrapper/Standalone";
 			sourceTree = SOURCE_ROOT;
 		};
-		C930B11C118E7B53005CD760 /* Audio */ = {
+		C930B11C118E7B53005CD760 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C930B11E118E7B53005CD760 /* PluginAudioProcessor.h */,
 				C930B11D118E7B53005CD760 /* PluginAudioProcessor.cpp */,
 			);
-			name = Audio;
-			path = ../../Source/Audio;
+			name = Models;
+			path = ../../Source/Models;
 			sourceTree = SOURCE_ROOT;
 		};
 		C930B11F118E7B53005CD760 /* Components */ = {
@@ -199,7 +199,7 @@
 		E419DE97A045DE82307A69FF /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C930B11C118E7B53005CD760 /* Audio */,
+				C930B11C118E7B53005CD760 /* Models */,
 				C930B11F118E7B53005CD760 /* Components */,
 				C930B122118E7B53005CD760 /* Startup */,
 			);
