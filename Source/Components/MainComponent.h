@@ -1,6 +1,6 @@
 /*
  *  MainComponent.h
- *  plugin_template1
+ *  audio_playhead1
  *
  *  Created by Matt Sonic on 5/4/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -16,8 +16,7 @@ class PluginAudioProcessor;
 
 class MainComponent : 
 public Component,
-public Timer,
-public SliderListener
+public Timer
 {
 public:
 	MainComponent (PluginAudioProcessor* pluginAudioProcessor_);
@@ -29,13 +28,11 @@ public:
 
 	// Timer methods
 	virtual void timerCallback();
-	
-	// SliderListener methods
-	virtual void sliderValueChanged (Slider* slider);
-	
+
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
-	Slider* gainSlider;
+	Label* positionLabel;	
+	AudioPlayHead::CurrentPositionInfo lastDisplayedPosition;
 };
 
 #endif

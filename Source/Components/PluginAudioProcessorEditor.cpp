@@ -1,6 +1,6 @@
 /*
  *  PluginAudioProcessorEditor.cpp
- *  plugin_template1
+ *  audio_playhead1
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -45,3 +45,4 @@ void PluginAudioProcessorEditor::resized()
 	mainComponent->setBounds (0, 0, getWidth(), getHeight());
 	resizer->setBounds (getWidth() - 16, getHeight() - 16, 16, 16);
 }
+

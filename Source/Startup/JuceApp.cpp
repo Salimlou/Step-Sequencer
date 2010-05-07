@@ -1,6 +1,6 @@
 /*
  *  JuceApp.cpp
- *  plugin_template1
+ *  audio_playhead1
  *
  *  Created by Matt Sonic on 3/27/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -22,7 +22,7 @@ JuceApp::~JuceApp()
 
 void JuceApp::initialise (const String& commandLine)
 {
-	const String applicationName = "plugin_template1";
+	const String applicationName = "audio_playhead1";
 	const String fileNameSuffix("app");
 	const String folderName("SonicTransfer");
 	ApplicationProperties::getInstance()->setStorageParameters(applicationName,
@@ -31,7 +31,7 @@ void JuceApp::initialise (const String& commandLine)
 															   0,
 															   PropertiesFile::storeAsXML);
 	
-	standaloneFilterWindow = new StandaloneFilterWindow ("plugin_template1", 
+	standaloneFilterWindow = new StandaloneFilterWindow ("audio_playhead1", 
 														 Colours::lightgrey);
 	standaloneFilterWindow->setVisible (true);
 }
@@ -43,7 +43,7 @@ void JuceApp::shutdown()
 
 const String JuceApp::getApplicationName()
 {
-	return T("plugin_template1");
+	return T("audio_playhead1");
 }
 
 const String JuceApp::getApplicationVersion()

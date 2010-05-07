@@ -1,6 +1,6 @@
 /*
  *  JuceApp.h
- *  plugin_template1
+ *  audio_playhead1
  *
  *  Created by Matt Sonic on 3/27/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.

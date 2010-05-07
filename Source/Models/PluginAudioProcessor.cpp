@@ -1,6 +1,6 @@
 /*
  *  PluginAudioProcessor.cpp
- *  plugin_template1
+ *  audio_playhead1
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -27,13 +27,12 @@ const String PluginAudioProcessor::getName() const
 
 int PluginAudioProcessor::getNumParameters()
 {
-    return totalNumParams;
+    return 0;
 }
 
 float PluginAudioProcessor::getParameter (int index)
 {
 	switch (index) {
-		case gainParam: return gain;
 		default:        return 0.0f;
 	}
 }
@@ -41,7 +40,6 @@ float PluginAudioProcessor::getParameter (int index)
 void PluginAudioProcessor::setParameter (int index, float newValue)
 {
 	switch (index) {
-		case gainParam: gain = newValue; break;
 		default:        break;
 	}	
 }
@@ -49,7 +47,6 @@ void PluginAudioProcessor::setParameter (int index, float newValue)
 const String PluginAudioProcessor::getParameterName (int index)
 {
 	switch (index) {
-		case gainParam: return "gain";
 		default:        return String::empty;
 	}
 }
@@ -134,12 +131,14 @@ void PluginAudioProcessor::releaseResources()
 
 void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
-    {
-        //float* channelData = buffer.getSampleData (channel);
-		buffer.applyGain (channel, 0, buffer.getNumSamples(), gain);
-    }
-
+	// Record the current time
+	AudioPlayHead::CurrentPositionInfo newTime;
+	if (getPlayHead() != 0 && getPlayHead()->getCurrentPosition (newTime)) {
+		lastPosInfo = newTime;
+	} else {
+		lastPosInfo.resetToDefault();
+	}
+	
     // In case we have more outputs than inputs, we'll clear any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -159,21 +158,12 @@ void PluginAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
-	XmlElement xml ("MYPLUGINSETTINGS");
-	xml.setAttribute ("gain", gain);
-	copyXmlToBinary (xml, destData);
 }
 
 void PluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-	ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
-	if (xmlState != 0) {
-		if (xmlState->hasTagName ("MYPLUGINSETTINGS")) {
-			gain = (float) xmlState->getDoubleAttribute ("gain", gain);
-		}
-	}
 }
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()

@@ -1,6 +1,6 @@
 /*
  *  PluginAudioProcessor.h
- *  plugin_template1
+ *  audio_playhead1
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -52,13 +52,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes);
 	
 	//--------------------------------------------------------------------------
-	enum Parameters {
-		gainParam = 0,
-		
-		totalNumParams
-	};
-	
-	float gain;
+	AudioPlayHead::CurrentPositionInfo lastPosInfo;
 	
     juce_UseDebuggingNewOperator
 };
