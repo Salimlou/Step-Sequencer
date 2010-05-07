@@ -1,6 +1,6 @@
 /*
  *  PluginAudioProcessorEditor.h
- *  audio_playhead1
+ *  audio_playhead2
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.

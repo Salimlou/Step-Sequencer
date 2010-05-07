@@ -1,6 +1,6 @@
 /*
  *  JucePluginCharacteristics.h
- *  audio_playhead1
+ *  audio_playhead2
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -14,8 +14,8 @@
 #define JucePlugin_Build_AU     0
 #define JucePlugin_Build_RTAS   0
 
-#define JucePlugin_Name                 "audio_playhead1"
-#define JucePlugin_Desc                 "audio_playhead1"
+#define JucePlugin_Name                 "audio_playhead2"
+#define JucePlugin_Desc                 "audio_playhead2"
 #define JucePlugin_Manufacturer         "SonicTransfer"
 #define JucePlugin_ManufacturerCode     'stpt'
 #define JucePlugin_PluginCode           'Stpt'
