@@ -38,8 +38,8 @@ void TransportComponent::paint (Graphics& g)
 
 void TransportComponent::resized()
 {
-	bpmSlider->setBounds (110, 10, 200, 40);
-	playButton->setBounds (10, 10, 100, 40);
+	bpmSlider->setBounds (110, 10, 200, 30);
+	playButton->setBounds (10, 10, 100, 30);
 }
 
 // ButtonListener methods

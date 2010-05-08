@@ -39,7 +39,7 @@ void StandaloneComponent::paint (Graphics& g)
 
 void StandaloneComponent::resized()
 {
-	transportComponent->setBounds (0, 0, getWidth(), 40);
-	audioProcessorEditor->setBounds (0, 40, getWidth(), getHeight() - 40);
+	transportComponent->setBounds (0, 0, getWidth(), 50);
+	audioProcessorEditor->setBounds (0, 50, getWidth(), getHeight() - 50);
 }
 
