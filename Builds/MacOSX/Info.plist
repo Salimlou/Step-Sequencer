@@ -7,9 +7,9 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.SonicTransfer.audio_playhead2</string>
+	<string>com.SonicTransfer.audio_playhead3</string>
 	<key>CFBundleName</key>
-	<string>audio_playhead2</string>
+	<string>audio_playhead3</string>
 	<key>CFBundlePackageType</key>
 	<string>TDMw</string>
 	<key>CFBundleSignature</key>

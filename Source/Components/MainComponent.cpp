@@ -1,6 +1,6 @@
 /*
  *  MainComponent.cpp
- *  audio_playhead2
+ *  audio_playhead3
  *
  *  Created by Matt Sonic on 5/4/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
