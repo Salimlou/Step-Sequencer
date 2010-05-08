@@ -7,11 +7,13 @@
  *
  */
 
+#include "CustomPlayHead.h"
+
 #include "TransportComponent.h"
 
-
-TransportComponent::TransportComponent() :
+TransportComponent::TransportComponent (AudioProcessor* audioProcessor_) :
 Component ("TransportComponent"),
+audioProcessor (audioProcessor_),
 bpmSlider (0),
 playButton (0)
 {
@@ -46,6 +48,10 @@ void TransportComponent::resized()
 void TransportComponent::buttonClicked (Button* button)
 {
 	if (button == playButton) {
+		CustomPlayHead* customPlayHead = dynamic_cast<CustomPlayHead*> (audioProcessor->getPlayHead());
+		if (customPlayHead != 0) {
+			customPlayHead->play();
+		}
 	}
 }
 

@@ -18,7 +18,7 @@ public ButtonListener,
 public SliderListener
 {
 public:
-	TransportComponent();
+	TransportComponent (AudioProcessor* audioProcessor_);
 	~TransportComponent();
 	
 	// Component methods
@@ -32,6 +32,7 @@ public:
 	virtual void sliderValueChanged (Slider* slider);
 	
 private:
+	AudioProcessor* audioProcessor;
 	Slider* bpmSlider;
 	TextButton* playButton;
 };

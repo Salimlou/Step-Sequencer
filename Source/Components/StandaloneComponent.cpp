@@ -16,7 +16,7 @@ Component ("StandaloneComponent"),
 audioProcessorEditor (audioProcessorEditor_),
 transportComponent (0)
 {
-	addAndMakeVisible (transportComponent = new TransportComponent());
+	addAndMakeVisible (transportComponent = new TransportComponent (audioProcessorEditor->getAudioProcessor()));
 	addAndMakeVisible (audioProcessorEditor);
 	
 	setSize (600, 400);

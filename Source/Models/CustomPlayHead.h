@@ -23,6 +23,8 @@ public:
 	CustomPlayHead (AudioProcessor* audioProcessor);
 	~CustomPlayHead();
 	
+	void play();
+	
 	// AudioPlayHead methods
 	virtual bool getCurrentPosition (CurrentPositionInfo& result);
 	

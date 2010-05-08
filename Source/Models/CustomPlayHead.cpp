@@ -27,6 +27,11 @@ CustomPlayHead::~CustomPlayHead()
 {
 }
 
+void CustomPlayHead::play()
+{
+	isPlaying = true;
+}
+
 // AudioPlayHead methods
 bool CustomPlayHead::getCurrentPosition (CurrentPositionInfo& pos)
 {
