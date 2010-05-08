@@ -52,6 +52,7 @@ void PluginAudioProcessorEditor::resized()
 // ComponentListener methods
 void PluginAudioProcessorEditor::componentParentHierarchyChanged (Component& component)
 {
+	// Add resizer after standalone window has been created.
 	if (resizer != 0) deleteAndZero (resizer);
 	Component* topLevelComponent = getTopLevelComponent();
 	addAndMakeVisible (resizer = new ResizableCornerComponent (topLevelComponent, 
