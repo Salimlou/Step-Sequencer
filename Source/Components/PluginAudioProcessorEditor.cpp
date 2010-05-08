@@ -20,7 +20,8 @@ mainComponent (0)
 	addAndMakeVisible (mainComponent = new MainComponent (pluginAudioProcessor));
 
 	resizeLimits.setSizeLimits (600, 400, 1200, 800);
-	addAndMakeVisible (resizer = new ResizableCornerComponent (this, &resizeLimits));
+	
+	addComponentListener (this);
 	
 	setSize (600, 400);
 }
@@ -43,6 +44,18 @@ void PluginAudioProcessorEditor::paint (Graphics& g)
 void PluginAudioProcessorEditor::resized() 
 {
 	mainComponent->setBounds (0, 0, getWidth(), getHeight());
-	resizer->setBounds (getWidth() - 16, getHeight() - 16, 16, 16);
+	if (resizer != 0) {
+		resizer->setBounds (getWidth() - 16, getHeight() - 16, 16, 16);
+	}
+}
+
+// ComponentListener methods
+void PluginAudioProcessorEditor::componentParentHierarchyChanged (Component& component)
+{
+	if (resizer != 0) deleteAndZero (resizer);
+	Component* topLevelComponent = getTopLevelComponent();
+	addAndMakeVisible (resizer = new ResizableCornerComponent (topLevelComponent, 
+															   &resizeLimits));
+	resized();
 }
 

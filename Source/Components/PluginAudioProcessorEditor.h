@@ -16,7 +16,9 @@
 class PluginAudioProcessor;
 class MainComponent;
 
-class PluginAudioProcessorEditor : public AudioProcessorEditor
+class PluginAudioProcessorEditor : 
+public AudioProcessorEditor,
+public ComponentListener
 {
 public:
     PluginAudioProcessorEditor (PluginAudioProcessor* pluginAudioProcessor);
@@ -28,6 +30,9 @@ public:
     virtual void paint (Graphics& g);
 	virtual void resized();
 	
+	// ComponentListener methods
+	virtual void componentParentHierarchyChanged (Component& component);	
+
 private:
 	ResizableCornerComponent* resizer;
 	ComponentBoundsConstrainer resizeLimits;
