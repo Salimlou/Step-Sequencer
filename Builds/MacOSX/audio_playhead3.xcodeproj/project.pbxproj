@@ -42,6 +42,10 @@
 		C969A3931194E0100062CEEE /* CustomPlayHead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A3921194E0100062CEEE /* CustomPlayHead.cpp */; };
 		C969A3961194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A3941194E1140062CEEE /* AudioProcessorCallback.cpp */; };
 		C969A3971194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A3941194E1140062CEEE /* AudioProcessorCallback.cpp */; };
+		C969A4531194E7E70062CEEE /* TransportComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4521194E7E70062CEEE /* TransportComponent.cpp */; };
+		C969A4541194E7E70062CEEE /* TransportComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4521194E7E70062CEEE /* TransportComponent.cpp */; };
+		C969A4981194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */; };
+		C969A4991194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */; };
 		CA4B0796F9761B49346E67CA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236A3C63C095F3E7D0CAB57 /* QuartzCore.framework */; };
 		F1987FCD17C063C4D768C1F7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4888E03EAF76109DC7ADA97 /* IOKit.framework */; };
 /* End PBXBuildFile section */
@@ -78,6 +82,10 @@
 		C969A3921194E0100062CEEE /* CustomPlayHead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomPlayHead.cpp; sourceTree = "<group>"; };
 		C969A3941194E1140062CEEE /* AudioProcessorCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioProcessorCallback.cpp; sourceTree = "<group>"; };
 		C969A3951194E1140062CEEE /* AudioProcessorCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioProcessorCallback.h; sourceTree = "<group>"; };
+		C969A4511194E7E70062CEEE /* TransportComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportComponent.h; sourceTree = "<group>"; };
+		C969A4521194E7E70062CEEE /* TransportComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransportComponent.cpp; sourceTree = "<group>"; };
+		C969A4961194EB8E0062CEEE /* StandaloneComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandaloneComponent.h; sourceTree = "<group>"; };
+		C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StandaloneComponent.cpp; sourceTree = "<group>"; };
 		D33D082C0DB010E0AB2BE898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9AECD02FA3BF8873B8969C4 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		E3C7EB89E3DDEFCBD0047DB6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -167,6 +175,10 @@
 				C930B120118E7B53005CD760 /* PluginAudioProcessorEditor.cpp */,
 				C9699D041190B5900062CEEE /* MainComponent.h */,
 				C9699D051190B5900062CEEE /* MainComponent.cpp */,
+				C969A4511194E7E70062CEEE /* TransportComponent.h */,
+				C969A4521194E7E70062CEEE /* TransportComponent.cpp */,
+				C969A4961194EB8E0062CEEE /* StandaloneComponent.h */,
+				C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */,
 			);
 			name = Components;
 			path = ../../Source/Components;
@@ -342,6 +354,8 @@
 				C930B12A118E7B53005CD760 /* PluginAudioProcessorEditor.cpp in Sources */,
 				C9699D061190B5900062CEEE /* MainComponent.cpp in Sources */,
 				C969A3971194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */,
+				C969A4541194E7E70062CEEE /* TransportComponent.cpp in Sources */,
+				C969A4981194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +372,8 @@
 				C969A36E1194DEC50062CEEE /* juce_StandaloneFilterWindow.cpp in Sources */,
 				C969A3931194E0100062CEEE /* CustomPlayHead.cpp in Sources */,
 				C969A3961194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */,
+				C969A4531194E7E70062CEEE /* TransportComponent.cpp in Sources */,
+				C969A4991194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

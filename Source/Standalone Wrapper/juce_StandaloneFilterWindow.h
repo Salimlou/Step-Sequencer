@@ -28,6 +28,7 @@
 
 #include "juce_AudioFilterStreamer.h"
 
+class StandaloneComponent;
 
 //==============================================================================
 /**
@@ -80,7 +81,9 @@ private:
     AudioProcessor* filter;
     AudioFilterStreamingDeviceManager* deviceManager;
     Button* optionsButton;
-
+	
+	StandaloneComponent* standaloneComponent;
+	
     void deleteFilter();
 
     StandaloneFilterWindow (const StandaloneFilterWindow&);

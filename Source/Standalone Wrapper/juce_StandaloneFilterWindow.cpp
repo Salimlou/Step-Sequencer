@@ -23,6 +23,8 @@
   ==============================================================================
 */
 
+#include "StandaloneComponent.h"
+
 #include "juce_StandaloneFilterWindow.h"
 #include "JucePluginCharacteristics.h"
 
@@ -35,13 +37,13 @@ extern AudioProcessor* JUCE_CALLTYPE createPluginFilter();
 
 //==============================================================================
 StandaloneFilterWindow::StandaloneFilterWindow (const String& title,
-                                                const Colour& backgroundColour)
-    : DocumentWindow (title, backgroundColour,
-                      DocumentWindow::minimiseButton
-                       | DocumentWindow::closeButton),
-      filter (0),
-      deviceManager (0),
-      optionsButton (0)
+                                                const Colour& backgroundColour) :
+DocumentWindow (title, backgroundColour,
+				DocumentWindow::minimiseButton
+				| DocumentWindow::closeButton),
+filter (0),
+deviceManager (0),
+optionsButton (0)
 {
     setTitleBarButtonsRequired (DocumentWindow::minimiseButton | DocumentWindow::closeButton, false);
 
@@ -88,8 +90,10 @@ StandaloneFilterWindow::StandaloneFilterWindow (const String& title,
                 }
             }
 
-            setContentComponent (filter->createEditorIfNeeded(), true, true);
-
+            //setContentComponent (filter->createEditorIfNeeded(), true, true);
+			standaloneComponent = new StandaloneComponent (filter->createEditorIfNeeded());
+			setContentComponent (standaloneComponent, true, true);
+			
             const int x = globalSettings->getIntValue (T("windowX"), -100);
             const int y = globalSettings->getIntValue (T("windowY"), -100);
 
@@ -145,7 +149,8 @@ void StandaloneFilterWindow::deleteFilter()
 
     if (filter != 0 && getContentComponent() != 0)
     {
-        filter->editorBeingDeleted (dynamic_cast <AudioProcessorEditor*> (getContentComponent()));
+		StandaloneComponent* sComp = dynamic_cast <StandaloneComponent*> (getContentComponent());
+        filter->editorBeingDeleted (sComp->getAudioProcessorEditor());
         setContentComponent (0, true);
     }
 
@@ -258,8 +263,9 @@ void StandaloneFilterWindow::resized()
 {
     DocumentWindow::resized();
 
-    if (optionsButton != 0)
+    if (optionsButton != 0) {
         optionsButton->setBounds (8, 6, 60, getTitleBarHeight() - 8);
+	}
 }
 
 void StandaloneFilterWindow::buttonClicked (Button*)
