@@ -1,6 +1,6 @@
 /*
  *  StandaloneComponent.cpp
- *  audio_playhead3
+ *  audio_playhead4
  *
  *  Created by Matt Sonic on 5/7/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.

@@ -1,6 +1,6 @@
 /*
  *  TransportComponent.cpp
- *  audio_playhead3
+ *  audio_playhead4
  *
  *  Created by Matt Sonic on 5/7/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -20,6 +20,7 @@ playButton (0)
 	
 	addAndMakeVisible (bpmSlider = new Slider ("bpmSlider"));
 	bpmSlider->setSliderStyle (Slider::RotaryVerticalDrag);
+	bpmSlider->setRange (30.0, 200.0, 0.10);
 	bpmSlider->setValue (128.0, true, false);
 	bpmSlider->setTextBoxStyle (Slider::TextBoxRight, false, 100, 20);
 	bpmSlider->addListener (this);
@@ -72,6 +73,8 @@ void TransportComponent::buttonClicked (Button* button)
 void TransportComponent::sliderValueChanged (Slider* slider)
 {
 	if (slider == bpmSlider) {
+		CustomPlayHead* customPlayHead = getPlayHead();
+		customPlayHead->setBPM (slider->getValue());
 	}
 }
 

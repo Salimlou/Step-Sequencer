@@ -1,6 +1,6 @@
 /*
  *  CustomPlayHead.h
- *  audio_playhead3
+ *  audio_playhead4
  *
  *  Created by Matt Sonic on 5/7/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -26,6 +26,8 @@ public:
 	void play();
 	void stop();
 	bool isPlaying();
+	double getBPM();
+	void setBPM (double bpm_);
 	
 	// AudioPlayHead methods
 	virtual bool getCurrentPosition (CurrentPositionInfo& result);

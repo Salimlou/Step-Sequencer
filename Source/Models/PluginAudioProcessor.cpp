@@ -1,6 +1,6 @@
 /*
  *  PluginAudioProcessor.cpp
- *  audio_playhead3
+ *  audio_playhead4
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
