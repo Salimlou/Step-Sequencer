@@ -18,8 +18,8 @@ timeSigDenominator (4),
 timeInSeconds (0),
 ppqPosition (0),
 ppqPositionOfLastBarStart (0),
-isPlaying (false),
-isRecording (false)
+playing (false),
+recording (false)
 {
 }
 
@@ -29,7 +29,17 @@ CustomPlayHead::~CustomPlayHead()
 
 void CustomPlayHead::play()
 {
-	isPlaying = true;
+	playing = true;
+}
+
+void CustomPlayHead::stop()
+{
+	playing = false;
+}
+
+bool CustomPlayHead::isPlaying()
+{
+	return playing;
 }
 
 // AudioPlayHead methods
@@ -41,8 +51,8 @@ bool CustomPlayHead::getCurrentPosition (CurrentPositionInfo& pos)
 	pos.timeInSeconds = timeInSeconds;
 	pos.ppqPosition = ppqPosition;
 	pos.ppqPositionOfLastBarStart = ppqPositionOfLastBarStart;
-	pos.isPlaying = isPlaying;
-	pos.isRecording = isRecording;
+	pos.isPlaying = playing;
+	pos.isRecording = recording;
  
 	pos.editOriginTime = 0;
 	pos.frameRate = AudioPlayHead::fpsUnknown;

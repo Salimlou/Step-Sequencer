@@ -12,6 +12,8 @@
 
 #include "JuceHeader.h"
 
+class CustomPlayHead;
+
 class TransportComponent : 
 public Component,
 public ButtonListener,
@@ -32,6 +34,8 @@ public:
 	virtual void sliderValueChanged (Slider* slider);
 	
 private:
+	CustomPlayHead* getPlayHead();
+	
 	AudioProcessor* audioProcessor;
 	Slider* bpmSlider;
 	TextButton* playButton;

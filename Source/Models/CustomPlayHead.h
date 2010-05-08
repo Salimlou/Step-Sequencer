@@ -24,6 +24,8 @@ public:
 	~CustomPlayHead();
 	
 	void play();
+	void stop();
+	bool isPlaying();
 	
 	// AudioPlayHead methods
 	virtual bool getCurrentPosition (CurrentPositionInfo& result);
@@ -41,8 +43,8 @@ private:
 	double timeInSeconds;
 	double ppqPosition;
 	double ppqPositionOfLastBarStart;
-	bool isPlaying;
-	bool isRecording;
+	bool playing;
+	bool recording;
 };
 
 #endif

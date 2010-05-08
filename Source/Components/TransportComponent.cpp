@@ -17,6 +17,7 @@ audioProcessor (audioProcessor_),
 bpmSlider (0),
 playButton (0)
 {
+	
 	addAndMakeVisible (bpmSlider = new Slider ("bpmSlider"));
 	bpmSlider->setSliderStyle (Slider::RotaryVerticalDrag);
 	bpmSlider->setValue (128.0, true, false);
@@ -30,6 +31,14 @@ playButton (0)
 TransportComponent::~TransportComponent()
 {
 	deleteAllChildren();
+}
+
+CustomPlayHead* TransportComponent::getPlayHead()
+{
+	CustomPlayHead* customPlayHead = dynamic_cast<CustomPlayHead*> (audioProcessor->getPlayHead());
+	jassert (customPlayHead != 0)
+
+	return customPlayHead;
 }
 
 // Component methods
@@ -48,9 +57,13 @@ void TransportComponent::resized()
 void TransportComponent::buttonClicked (Button* button)
 {
 	if (button == playButton) {
-		CustomPlayHead* customPlayHead = dynamic_cast<CustomPlayHead*> (audioProcessor->getPlayHead());
-		if (customPlayHead != 0) {
+		CustomPlayHead* customPlayHead = getPlayHead();
+		if (customPlayHead->isPlaying()) {
+			customPlayHead->stop();
+			playButton->setButtonText ("Play");
+		} else {
 			customPlayHead->play();
+			playButton->setButtonText ("Stop");
 		}
 	}
 }
