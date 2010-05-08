@@ -11,7 +11,15 @@
 
 
 CustomPlayHead::CustomPlayHead (AudioProcessor* audioProcessor) :
-AudioProcessorCallback (audioProcessor)
+AudioProcessorCallback (audioProcessor),
+bpm (128),
+timeSigNumerator (4),
+timeSigDenominator (4),
+timeInSeconds (0),
+ppqPosition (0),
+ppqPositionOfLastBarStart (0),
+isPlaying (false),
+isRecording (false)
 {
 }
 
@@ -22,7 +30,17 @@ CustomPlayHead::~CustomPlayHead()
 // AudioPlayHead methods
 bool CustomPlayHead::getCurrentPosition (CurrentPositionInfo& pos)
 {
-	pos.bpm = 128;
+	pos.bpm = bpm;
+	pos.timeSigNumerator = timeSigNumerator;
+	pos.timeSigDenominator = timeSigDenominator;
+	pos.timeInSeconds = timeInSeconds;
+	pos.ppqPosition = ppqPosition;
+	pos.ppqPositionOfLastBarStart = ppqPositionOfLastBarStart;
+	pos.isPlaying = isPlaying;
+	pos.isRecording = isRecording;
+ 
+	pos.editOriginTime = 0;
+	pos.frameRate = AudioPlayHead::fpsUnknown;
 	
 	return true;	
 }

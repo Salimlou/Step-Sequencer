@@ -31,6 +31,16 @@ public:
     virtual void releaseResources();
     virtual void processBlock (AudioSampleBuffer& buffer, 
 							   MidiBuffer& midiMessages);
+
+private:
+	double bpm;
+	int timeSigNumerator;
+	int timeSigDenominator;
+	double timeInSeconds;
+	double ppqPosition;
+	double ppqPositionOfLastBarStart;
+	bool isPlaying;
+	bool isRecording;
 };
 
 #endif
