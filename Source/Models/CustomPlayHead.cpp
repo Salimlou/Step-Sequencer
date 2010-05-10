@@ -20,7 +20,10 @@ timeInSeconds (0),
 ppqPosition (0),
 ppqPositionOfLastBarStart (0),
 playing (false),
-recording (false)
+recording (false),
+timeInSecondsOffset (0),
+ppqPositionOffset (0),
+timeInSecondsSinceLastBPMChange (0)
 {
 	setBPM (bpm);
 }
@@ -37,14 +40,19 @@ void CustomPlayHead::play()
 
 void CustomPlayHead::stop()
 {
+	timeInSecondsOffset = 0;
+	ppqPositionOffset = 0;
+
 	reset();
+	
 	playing = false;
 }
 
 void CustomPlayHead::reset()
 {
-	timeInSeconds = 0;
-	ppqPosition = 0;
+	timeInSeconds = timeInSecondsOffset;
+	timeInSecondsSinceLastBPMChange = 0;
+	ppqPosition = ppqPositionOffset;
 	ppqPositionOfLastBarStart = 0;
 }
 
@@ -62,10 +70,21 @@ void CustomPlayHead::setBPM (double bpm_)
 {
 	bpm = bpm_;
 	
+	lock.enter();
+	
 	double beatsPerSec = bpm / 60.0;
 	secPerBeat = 1.0 / beatsPerSec;
 	
 	ppqPerBar = (timeSigNumerator * 4 / timeSigDenominator);
+	
+	// set offsets
+	timeInSecondsOffset = timeInSeconds;
+	ppqPositionOffset = ppqPosition;
+	
+	reset();
+	
+	lock.exit();
+	
 }
 
 // AudioPlayHead methods
@@ -103,9 +122,18 @@ void CustomPlayHead::processBlock (AudioSampleBuffer& buffer,
 		return;
 	}
 	
-	timeInSeconds += buffer.getNumSamples() / sampleRate;
-	ppqPosition = timeInSeconds / secPerBeat;
+	lock.enter();
+
+	timeInSecondsSinceLastBPMChange += buffer.getNumSamples() / sampleRate;
+	
+	ppqPosition = timeInSecondsSinceLastBPMChange / secPerBeat;
+	ppqPosition += ppqPositionOffset;
+	
 	ppqPositionOfLastBarStart = (((int) ppqPosition) / ppqPerBar) * ppqPerBar;	
+	
+	timeInSeconds = timeInSecondsSinceLastBPMChange + timeInSecondsOffset;
+	
+	lock.exit();
 }
 
 

@@ -54,6 +54,12 @@ private:
 	
 	double secPerBeat;
 	int ppqPerBar;
+	
+	double timeInSecondsSinceLastBPMChange;
+	double timeInSecondsOffset;
+	double ppqPositionOffset;
+	
+	CriticalSection lock;
 };
 
 #endif
