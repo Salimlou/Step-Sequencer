@@ -24,6 +24,7 @@
 */
 
 #include "CustomPlayHead.h"
+#include "PluginAudioProcessor.h"
 
 #include "juce_AudioFilterStreamer.h"
 #include "JucePluginCharacteristics.h"
@@ -58,6 +59,10 @@ void AudioFilterStreamingDeviceManager::setFilter (AudioProcessor* filterToStrea
 	if (filterToStream != 0) {
 		customPlayHead = new CustomPlayHead (filterToStream);
 		filterToStream->setPlayHead (customPlayHead);
+		PluginAudioProcessor* pluginAudioProcessor = dynamic_cast<PluginAudioProcessor*> (filterToStream);
+		if (pluginAudioProcessor != 0) {
+			pluginAudioProcessor->setCustomPlayHead (customPlayHead);
+		}
 	}
 }
 

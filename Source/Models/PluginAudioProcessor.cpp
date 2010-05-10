@@ -8,15 +8,22 @@
  */
 
 #include "PluginAudioProcessorEditor.h"
+#include "CustomPlayHead.h"
 
 #include "PluginAudioProcessor.h"
 
-PluginAudioProcessor::PluginAudioProcessor()
+PluginAudioProcessor::PluginAudioProcessor() :
+customPlayHead (0)
 {
 }
 
 PluginAudioProcessor::~PluginAudioProcessor()
 {
+}
+
+void PluginAudioProcessor::setCustomPlayHead (CustomPlayHead* customPlayHead_)
+{
+	customPlayHead = customPlayHead_;
 }
 
 // AudioProcessor methods
@@ -121,16 +128,20 @@ void PluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+	if (customPlayHead != 0) customPlayHead->prepareToPlay (sampleRate, samplesPerBlock);
 }
 
 void PluginAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+	if (customPlayHead != 0) customPlayHead->releaseResources();
 }
 
 void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
+	if (customPlayHead != 0) customPlayHead->processBlock (buffer, midiMessages);
+	
 	// Record the current time
 	AudioPlayHead::CurrentPositionInfo newTime;
 	if (getPlayHead() != 0 && getPlayHead()->getCurrentPosition (newTime)) {

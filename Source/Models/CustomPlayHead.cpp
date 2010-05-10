@@ -12,6 +12,7 @@
 
 CustomPlayHead::CustomPlayHead (AudioProcessor* audioProcessor) :
 AudioProcessorCallback (audioProcessor),
+sampleRate (0),
 bpm (128),
 timeSigNumerator (4),
 timeSigDenominator (4),
@@ -29,11 +30,13 @@ CustomPlayHead::~CustomPlayHead()
 
 void CustomPlayHead::play()
 {
+	timeInSeconds = 0;
 	playing = true;
 }
 
 void CustomPlayHead::stop()
 {
+	timeInSeconds = 0;
 	playing = false;
 }
 
@@ -71,8 +74,9 @@ bool CustomPlayHead::getCurrentPosition (CurrentPositionInfo& pos)
 }
 
 // AudioProcessorCallback methods
-void CustomPlayHead::prepareToPlay (double sampleRate, int samplesPerBlock)
+void CustomPlayHead::prepareToPlay (double sampleRate_, int samplesPerBlock)
 {
+	sampleRate = sampleRate_;
 }
 
 void CustomPlayHead::releaseResources()
@@ -82,6 +86,11 @@ void CustomPlayHead::releaseResources()
 void CustomPlayHead::processBlock (AudioSampleBuffer& buffer,
 								   MidiBuffer& midiMessages)
 {
+	if (! playing) {
+		return;
+	}
+	
+	timeInSeconds += buffer.getNumSamples() / sampleRate;
 }
 
 

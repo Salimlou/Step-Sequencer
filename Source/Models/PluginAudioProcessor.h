@@ -13,12 +13,16 @@
 #include "JuceHeader.h"
 #include "JucePluginCharacteristics.h"
 
+class CustomPlayHead;
+
 class PluginAudioProcessor : public AudioProcessor
 {
 public:
     PluginAudioProcessor();
     ~PluginAudioProcessor();
 
+	void setCustomPlayHead (CustomPlayHead* customPlayHead_);
+	
 	// AudioProcessor methods
     void prepareToPlay (double sampleRate, int samplesPerBlock);
     void releaseResources();
@@ -55,6 +59,9 @@ public:
 	AudioPlayHead::CurrentPositionInfo lastPosInfo;
 	
     juce_UseDebuggingNewOperator
+
+private:
+	CustomPlayHead* customPlayHead;
 };
 
 #endif  

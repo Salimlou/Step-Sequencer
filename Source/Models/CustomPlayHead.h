@@ -39,6 +39,7 @@ public:
 							   MidiBuffer& midiMessages);
 
 private:
+	double sampleRate;
 	double bpm;
 	int timeSigNumerator;
 	int timeSigDenominator;
