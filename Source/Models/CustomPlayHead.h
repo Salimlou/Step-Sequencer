@@ -26,6 +26,9 @@ public:
 	void play();
 	void stop();
 	bool isPlaying();
+	
+	void reset();
+	
 	double getBPM();
 	void setBPM (double bpm_);
 	
@@ -48,6 +51,9 @@ private:
 	double ppqPositionOfLastBarStart;
 	bool playing;
 	bool recording;
+	
+	double secPerBeat;
+	int ppqPerBar;
 };
 
 #endif

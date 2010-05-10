@@ -13,7 +13,7 @@
 CustomPlayHead::CustomPlayHead (AudioProcessor* audioProcessor) :
 AudioProcessorCallback (audioProcessor),
 sampleRate (0),
-bpm (128),
+bpm (120),
 timeSigNumerator (4),
 timeSigDenominator (4),
 timeInSeconds (0),
@@ -22,6 +22,7 @@ ppqPositionOfLastBarStart (0),
 playing (false),
 recording (false)
 {
+	setBPM (bpm);
 }
 
 CustomPlayHead::~CustomPlayHead()
@@ -30,14 +31,21 @@ CustomPlayHead::~CustomPlayHead()
 
 void CustomPlayHead::play()
 {
-	timeInSeconds = 0;
+	reset();
 	playing = true;
 }
 
 void CustomPlayHead::stop()
 {
-	timeInSeconds = 0;
+	reset();
 	playing = false;
+}
+
+void CustomPlayHead::reset()
+{
+	timeInSeconds = 0;
+	ppqPosition = 0;
+	ppqPositionOfLastBarStart = 0;
 }
 
 bool CustomPlayHead::isPlaying()
@@ -53,6 +61,11 @@ double CustomPlayHead::getBPM()
 void CustomPlayHead::setBPM (double bpm_)
 {
 	bpm = bpm_;
+	
+	double beatsPerSec = bpm / 60.0;
+	secPerBeat = 1.0 / beatsPerSec;
+	
+	ppqPerBar = (timeSigNumerator * 4 / timeSigDenominator);
 }
 
 // AudioPlayHead methods
@@ -91,6 +104,8 @@ void CustomPlayHead::processBlock (AudioSampleBuffer& buffer,
 	}
 	
 	timeInSeconds += buffer.getNumSamples() / sampleRate;
+	ppqPosition = timeInSeconds / secPerBeat;
+	ppqPositionOfLastBarStart = (((int) ppqPosition) / ppqPerBar) * ppqPerBar;	
 }
 
 
