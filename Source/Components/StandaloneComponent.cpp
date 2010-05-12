@@ -8,6 +8,7 @@
  */
 
 #include "TransportComponent.h"
+#include "PluginAudioProcessorEditor.h"
 
 #include "StandaloneComponent.h"
 
@@ -18,6 +19,11 @@ transportComponent (0)
 {
 	addAndMakeVisible (transportComponent = new TransportComponent (audioProcessorEditor->getAudioProcessor()));
 	addAndMakeVisible (audioProcessorEditor);
+	
+	PluginAudioProcessorEditor* pluginAudioProcessorEditor = dynamic_cast<PluginAudioProcessorEditor*> (audioProcessorEditor);
+	if (pluginAudioProcessorEditor != 0) {
+		pluginAudioProcessorEditor->setStandalone (true);
+	}
 	
 	setSize (600, 400);
 }

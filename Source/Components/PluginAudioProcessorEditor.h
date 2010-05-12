@@ -24,6 +24,9 @@ public:
     PluginAudioProcessorEditor (PluginAudioProcessor* pluginAudioProcessor);
     ~PluginAudioProcessorEditor();
 
+	bool getStandalone();
+	void setStandalone (bool standalone_);	
+	
     PluginAudioProcessor* getPluginAudioProcessor() const;
 
 	// Component methods
@@ -37,6 +40,7 @@ private:
 	ResizableCornerComponent* resizer;
 	ComponentBoundsConstrainer resizeLimits;
 	MainComponent* mainComponent;
+	bool standalone;
 };
 
 #endif 

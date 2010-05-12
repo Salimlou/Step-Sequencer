@@ -15,10 +15,12 @@
 PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor* pluginAudioProcessor) : 
 AudioProcessorEditor (pluginAudioProcessor),
 resizer (0),
-mainComponent (0)
+mainComponent (0),
+standalone (false)
 {
 	addAndMakeVisible (mainComponent = new MainComponent (pluginAudioProcessor));
 
+	addAndMakeVisible (resizer = new ResizableCornerComponent (this, &resizeLimits));	
 	resizeLimits.setSizeLimits (600, 400, 1200, 800);
 	
 	addComponentListener (this);
@@ -29,6 +31,16 @@ mainComponent (0)
 PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 {
 	deleteAllChildren();
+}
+
+bool PluginAudioProcessorEditor::getStandalone()
+{
+	return standalone;
+}
+
+void PluginAudioProcessorEditor::setStandalone (bool standalone_)
+{
+	standalone = standalone_;
 }
 
 PluginAudioProcessor* PluginAudioProcessorEditor::getPluginAudioProcessor() const
@@ -52,6 +64,8 @@ void PluginAudioProcessorEditor::resized()
 // ComponentListener methods
 void PluginAudioProcessorEditor::componentParentHierarchyChanged (Component& component)
 {
+	if (! standalone) return;
+	
 	// Add resizer after standalone window has been created.
 	if (resizer != 0) deleteAndZero (resizer);
 	Component* topLevelComponent = getTopLevelComponent();
