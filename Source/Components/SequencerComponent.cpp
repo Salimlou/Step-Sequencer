@@ -98,14 +98,54 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 		newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
 	} else if (key.getKeyCode() == KeyPress::pageUpKey) {
 		newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
-	} else if (key.getKeyCode() == KeyPress::spaceKey) {
-		selectedCell->setChecked (true);
-		newSelectedCell = selectedCell->getSouthCell();
 	} else if (key.getKeyCode() == KeyPress::deleteKey) {
-		selectedCell->setChecked (false);
+		selectedCell->setNoteNumber (-1);
 		newSelectedCell = selectedCell->getSouthCell();
-	} 
-
+	} else if (key.getKeyCode() == KeyPress::spaceKey) {
+	} else {
+		int newNoteNumber = 0;	
+		switch (key.getKeyCode()) {
+			case 'q':
+				newNoteNumber = 60; break;
+			case '2':
+				newNoteNumber = 61; break;
+			case 'w':
+				newNoteNumber = 62; break;
+			case '3':
+				newNoteNumber = 63; break;
+			case 'e':
+				newNoteNumber = 64; break;
+			case 'r':
+				newNoteNumber = 65; break;
+			case '5':
+				newNoteNumber = 66; break;
+			case 't':
+				newNoteNumber = 67; break;
+			case '6':
+				newNoteNumber = 68; break;
+			case 'y':
+				newNoteNumber = 69; break;
+			case '7':
+				newNoteNumber = 70; break;
+			case 'u':
+				newNoteNumber = 71; break;
+			case 'i':
+				newNoteNumber = 72; break;
+			case '9':
+				newNoteNumber = 73; break;
+			case 'o':
+				newNoteNumber = 74; break;
+			case '0':
+				newNoteNumber = 75; break;
+			case 'p':
+				newNoteNumber = 76; break;
+		}
+		if (newNoteNumber > 0) {
+			selectedCell->setNoteNumber(newNoteNumber);
+			newSelectedCell = selectedCell->getSouthCell();
+		}
+	}
+	
 	if (newSelectedCell != 0) {
 		selectedCell = newSelectedCell;
 		tableListBox->selectRow(selectedCell->getRow(), false, true);
@@ -118,7 +158,7 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 // TableListBoxModel methods
 int SequencerComponent::getNumRows()
 {
-	return totalRows + 1;	
+	return totalRows;	
 }
 
 void SequencerComponent::paintRowBackground (Graphics& g,
@@ -126,6 +166,7 @@ void SequencerComponent::paintRowBackground (Graphics& g,
 											 int width, int height,
 											 bool rowIsSelected)
 {
+/*
 	if (rowIsSelected) {
 		g.fillAll (Colours::darkblue);
 	} else {
@@ -135,6 +176,7 @@ void SequencerComponent::paintRowBackground (Graphics& g,
 			g.fillAll (Colours::black);
 		}
 	}	
+ */
 }
 
 void SequencerComponent::paintCell (Graphics& g,
@@ -149,15 +191,67 @@ void SequencerComponent::paintCell (Graphics& g,
 	if (colNum == -1) {
 		g.fillAll (Colours::lightgrey);
 		g.drawText(String(rowNum), 0, 0, width, height, Justification::centred, false);
+	} else if (rowNum >= totalRows) {
+		g.fillAll (Colours::black);
 	} else {
 		OwnedArray<Cell>* col = columns[colNum];
 		Cell* cell = col->getUnchecked (rowNum);
 		if (cell == selectedCell) {
-			g.fillAll( Colours::blue );
+			g.fillAll (Colours::blue);
+		} else if ((selectedCell != 0) 
+				   && (cell->getRow() == selectedCell->getRow())) {
+			g.fillAll (Colour::fromRGB(30, 30, 100));
+		} else if (((rowNum) % 4 == 0) 
+				   && ((colNum % 4) == 0)) {
+			g.fillAll (Colour::fromRGB(50, 50, 50));
+		} else if ((rowNum) % 4 == 0) {
+			g.fillAll (Colour::fromRGB(30, 30, 30));
+		} else if ((colNum) % 4 == 0) {
+			g.fillAll (Colour::fromRGB(30, 30, 30));
+		} else {
+			g.fillAll (Colours::black);
 		}
-		if (cell->isChecked()) {
+		
+		String noteString;
+		switch (cell->getNoteNumber()) {
+			case 60:
+				noteString << "C-3"; break;
+			case 61:
+				noteString << "C#-3"; break;
+			case 62:
+				noteString << "D-3"; break;
+			case 63:
+				noteString << "D#-3"; break;
+			case 64:
+				noteString << "E-3"; break;
+			case 65:
+				noteString << "F-3"; break;
+			case 66:
+				noteString << "F#-3"; break;
+			case 67:
+				noteString << "G-3"; break;
+			case 68:
+				noteString << "G#-3"; break;
+			case 69:
+				noteString << "A-3"; break;
+			case 70:
+				noteString << "A#-3"; break;
+			case 71:
+				noteString << "B-3"; break;
+			case 72:
+				noteString << "C-4"; break;
+			case 73:
+				noteString << "C#-4"; break;
+			case 74:
+				noteString << "D-4"; break;
+			case 75:
+				noteString << "D#-4"; break;
+			case 76:
+				noteString << "E-4"; break;
+		}
+		if (!noteString.isEmpty()) {
 			g.setColour (Colours::white);
-			g.drawText(T("C-3"), 0, 0, width, height, Justification::centred, false);
+			g.drawText(noteString, 0, 0, width, height, Justification::centred, false);
 		} 
 	}
 	g.setColour (Colours::darkgrey);

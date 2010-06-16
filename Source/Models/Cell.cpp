@@ -10,28 +10,18 @@
 #include "Cell.h"
 
 Cell::Cell (int row_, int col_) :
-checked (false),
 northCell (0),
 westCell (0),
 eastCell (0),
 southCell (0),
 row (row_),
-col (col_)
+col (col_),
+noteNumber (-1)
 {
 }
 
 Cell::~Cell()
 {
-}
-
-void Cell::setChecked (bool checked_)
-{
-	checked = checked_;
-}
-
-bool Cell::isChecked()
-{
-	return checked;
 }
 
 void Cell::setNorthCell (Cell* northCell_)
@@ -83,8 +73,30 @@ int Cell::getRow()
 	return row;
 }
 
+void Cell::setRow (int row_)
+{
+	row = row_;
+}
+
 int Cell::getCol()
 {
 	return col;
 }
+
+void Cell::setCol (int col_)
+{
+	col = col_;
+}
+
+int Cell::getNoteNumber()
+{
+	return noteNumber;
+}
+
+void Cell::setNoteNumber (int noteNumber_)
+{
+	noteNumber = noteNumber_;
+}
+
+
 

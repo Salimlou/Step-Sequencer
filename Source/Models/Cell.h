@@ -17,27 +17,34 @@ class Cell
 public:
 	Cell (int row_, int col_);
 	~Cell();
-	void setChecked (bool checked_);
-	bool isChecked();
+	
 	void setNorthCell (Cell* northCell_);
 	void setWestCell (Cell* westCell_);
 	void setEastCell (Cell* eastCell_);
 	void setSouthCell (Cell* southCell_);
+	
 	Cell* getNorthCell();
 	Cell* getWestCell();
 	Cell* getEastCell();
 	Cell* getSouthCell();
+
 	int getRow();
+	void setRow (int row_);
 	int getCol();
+	void setCol (int col_);
+	
+	int getNoteNumber();
+	void setNoteNumber (int noteNumber_);
 	
 private:
-	bool checked;
 	Cell* northCell;
 	Cell* westCell;
 	Cell* eastCell;
 	Cell* southCell;
 	int row;
 	int col;
+
+	int noteNumber;
 };
 
 #endif
