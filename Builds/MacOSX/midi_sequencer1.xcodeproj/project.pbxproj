@@ -43,8 +43,6 @@
 		C969A3961194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A3941194E1140062CEEE /* AudioProcessorCallback.cpp */; };
 		C969A3971194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A3941194E1140062CEEE /* AudioProcessorCallback.cpp */; };
 		C969A4531194E7E70062CEEE /* TransportComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4521194E7E70062CEEE /* TransportComponent.cpp */; };
-		C969A4541194E7E70062CEEE /* TransportComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4521194E7E70062CEEE /* TransportComponent.cpp */; };
-		C969A4981194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */; };
 		C969A4991194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */; };
 		C9E04CC311C8669F0099DF10 /* SequencerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E04CC211C8669F0099DF10 /* SequencerComponent.cpp */; };
 		C9E04CC411C8669F0099DF10 /* SequencerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E04CC211C8669F0099DF10 /* SequencerComponent.cpp */; };
@@ -372,8 +370,6 @@
 				C930B12A118E7B53005CD760 /* PluginAudioProcessorEditor.cpp in Sources */,
 				C9699D061190B5900062CEEE /* MainComponent.cpp in Sources */,
 				C969A3971194E1140062CEEE /* AudioProcessorCallback.cpp in Sources */,
-				C969A4541194E7E70062CEEE /* TransportComponent.cpp in Sources */,
-				C969A4981194EB8E0062CEEE /* StandaloneComponent.cpp in Sources */,
 				C9E04CC411C8669F0099DF10 /* SequencerComponent.cpp in Sources */,
 				C9E04CCC11C8680B0099DF10 /* Cell.cpp in Sources */,
 				C9E04D1411C86C3F0099DF10 /* MyTableListBox.cpp in Sources */,

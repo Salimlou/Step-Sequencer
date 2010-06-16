@@ -85,52 +85,29 @@ void SequencerComponent::resized()
 
 bool SequencerComponent::keyPressed (const KeyPress& key)
 {
+	Cell* newSelectedCell = 0;
 	if (key.getKeyCode() == KeyPress::leftKey) {
-		Cell* newSelectedCell = selectedCell->getWestCell();
-		if (newSelectedCell != 0) {
-			selectedCell = newSelectedCell;
-		}
-		repaint();
+		newSelectedCell = selectedCell->getWestCell();
 	} else if (key.getKeyCode() == KeyPress::rightKey) {
-		Cell* newSelectedCell = selectedCell->getEastCell();
-		if (newSelectedCell != 0) {
-			selectedCell = newSelectedCell;
-		}
-		repaint();
+		newSelectedCell = selectedCell->getEastCell();
 	} else if (key.getKeyCode() == KeyPress::downKey) {
-		Cell* newSelectedCell = selectedCell->getSouthCell();
-		if (newSelectedCell != 0) {
-			selectedCell = newSelectedCell;
-			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
-		}
-		repaint();
+		newSelectedCell = selectedCell->getSouthCell();
 	} else if (key.getKeyCode() == KeyPress::upKey) {
-		Cell* newSelectedCell = selectedCell->getNorthCell();
-		if (newSelectedCell != 0) {
-			selectedCell = newSelectedCell;
-			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
-		}
-		repaint();
+		newSelectedCell = selectedCell->getNorthCell();
 	} else if (key.getKeyCode() == KeyPress::pageDownKey) {
-		Cell* newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
-		if (newSelectedCell != 0) {
-			selectedCell = newSelectedCell;
-			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
-		}
-		repaint();
+		newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
 	} else if (key.getKeyCode() == KeyPress::pageUpKey) {
-		Cell* newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
-		if (newSelectedCell != 0) {
-			selectedCell = newSelectedCell;
-			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
-		}
-		repaint();		
+		newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
 	} else if (key.getKeyCode() == KeyPress::spaceKey) {
 		selectedCell->setChecked (true);
-		tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
- 
-		repaint();
+		newSelectedCell = selectedCell->getSouthCell();
 	} 
+
+	if (newSelectedCell != 0) {
+		selectedCell = newSelectedCell;
+		tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
+		repaint();	
+	}
 	
 	return true;	
 }
