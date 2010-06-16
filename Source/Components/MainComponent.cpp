@@ -39,7 +39,7 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
-	positionLabel->setBounds(10, 10, getWidth() - 20, 50);
+	positionLabel->setBounds (10, 10, getWidth() - 20, 50);
 	sequencerComponent->setBounds (10, 80, getWidth() - 20, getHeight() - 80);
 }
 
@@ -54,18 +54,18 @@ void MainComponent::timerCallback()
 		displayText.preallocateStorage (64);
 		
 		displayText 
-		<< "BPM: " << String (pos.bpm, 2) << "\n"
-		<< "Time Sig: " << pos.timeSigNumerator << "/" << pos.timeSigDenominator << "\n"
-		<< "Recording: " << String (pos.isRecording) << "\n" // Doesn't work in Live 8
-		<< "Playing: " << String (pos.isPlaying) << "\n" 
+		<< "BPM: " << String (pos.bpm, 2) << " "
+		//		<< "Time Sig: " << pos.timeSigNumerator << "/" << pos.timeSigDenominator << "\n"
+		<< "Recording: " << String (pos.isRecording) << " " // Doesn't work in Live 8
+		<< "Playing: " << String (pos.isPlaying) << " " 
 		<< "Time In Seconds: " << String (pos.timeInSeconds) << "\n"
-		<< "PPQ Position: " << String (pos.ppqPosition) << "\n"
+		<< "PPQ Position: " << String (pos.ppqPosition) << " "
 		<< "PPQ Position of Last Bar Start: " << String (pos.ppqPositionOfLastBarStart) << "\n"
-		<< "Edit Origin Time: " << String (pos.editOriginTime) << "\n" // Doesn't work in Live 8
-		<< "Framerate: " << String (pos.frameRate) << "\n" // Shows '99' in Live 8
-		<< "Timecode String: " << timeToTimecodeString (pos.timeInSeconds) << "\n"
+		//<< "Edit Origin Time: " << String (pos.editOriginTime) << "\n" // Doesn't work in Live 8
+		//<< "Framerate: " << String (pos.frameRate) << "\n" // Shows '99' in Live 8
+		//<< "Timecode String: " << timeToTimecodeString (pos.timeInSeconds) << "\n"
 		<< "Bars, Beats, & Ticks: " << ppqToBarsBeatsString (pos.ppqPosition, pos.timeSigNumerator,
-													 pos.timeSigDenominator) << "\n";
+													 pos.timeSigDenominator);
 		
 		positionLabel->setText (displayText, false);
 	}
