@@ -56,21 +56,25 @@ void Cell::setSouthCell (Cell* southCell_)
 
 Cell* Cell::getNorthCell()
 {
+	if (!northCell) return this;
 	return northCell;
 }
 
 Cell* Cell::getWestCell()
 {
+	if (!westCell) return this;
 	return westCell;
 }
 
 Cell* Cell::getEastCell()
 {
+	if (!eastCell) return this;
 	return eastCell;
 }
 
 Cell* Cell::getSouthCell()
 {
+	if (!southCell) return this;
 	return southCell;
 }
 

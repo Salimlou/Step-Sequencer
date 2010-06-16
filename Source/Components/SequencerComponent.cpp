@@ -101,24 +101,33 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 		Cell* newSelectedCell = selectedCell->getSouthCell();
 		if (newSelectedCell != 0) {
 			selectedCell = newSelectedCell;
+			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
 		}
 		repaint();
 	} else if (key.getKeyCode() == KeyPress::upKey) {
 		Cell* newSelectedCell = selectedCell->getNorthCell();
 		if (newSelectedCell != 0) {
 			selectedCell = newSelectedCell;
+			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
 		}
 		repaint();
+	} else if (key.getKeyCode() == KeyPress::pageDownKey) {
+		Cell* newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
+		if (newSelectedCell != 0) {
+			selectedCell = newSelectedCell;
+			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
+		}
+		repaint();
+	} else if (key.getKeyCode() == KeyPress::pageUpKey) {
+		Cell* newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
+		if (newSelectedCell != 0) {
+			selectedCell = newSelectedCell;
+			tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
+		}
+		repaint();		
 	} else if (key.getKeyCode() == KeyPress::spaceKey) {
 		selectedCell->setChecked (true);
-		
-/*
-		int nextRow = tableListBox->getSelectedRow(0) + 1;
-		nextRow = jmin(nextRow, tableListBox->getNumRows() - 1);
-		SparseSet<int> ss;
-		ss.addRange (Range<int>(nextRow, 1));
-		tableListBox->setSelectedRows(ss, true);
-*/
+		tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
  
 		repaint();
 	} 
@@ -197,6 +206,7 @@ void SequencerComponent::cellClicked (int rowNumber, int columnId, const MouseEv
 
 void SequencerComponent::selectedRowsChanged (int lastRowSelected)
 {
+/*
 	if (!selectedCell) {
 		selectedRowIndex = lastRowSelected;
 		return;
@@ -225,21 +235,23 @@ void SequencerComponent::selectedRowsChanged (int lastRowSelected)
 		selectedCell = newSelectedCell;
 	}
 	selectedRowIndex = lastRowSelected;
-	
 	tableListBox->scrollToEnsureRowIsOnscreen (lastRowSelected);
 	repaint();	
+ */
 }
 
 void SequencerComponent::deleteKeyPressed (int lastRowSelected)
 {
 	selectedCell->setChecked (false);
 	
+/*
 	int nextRow = tableListBox->getSelectedRow(0) + 1;
 	nextRow = jmin(nextRow, tableListBox->getNumRows() - 1);
 	SparseSet<int> ss;
 	ss.addRange (Range<int>(nextRow, 1));
 	tableListBox->setSelectedRows(ss, true);
-	
+*/
+ 
 	repaint();	
 }
 
