@@ -25,6 +25,8 @@ public:
 	~SequencerComponent();
 	
 	void addTableColumn (const String& title, int ID);
+	int getPlayheadRow();
+	void setPlayheadRow (int playheadRow_);
 	
 	// Component methods
 	virtual void paint (Graphics& g);
@@ -44,7 +46,7 @@ public:
 							bool rowIsSelected);	
     virtual void cellClicked (int rowNumber, int columnId, const MouseEvent& e);
 	virtual void selectedRowsChanged (int lastRowSelected);
-	
+
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
 	
@@ -54,6 +56,8 @@ private:
 	OwnedArray< OwnedArray<Cell> > columns;
 	Cell* selectedCell; // owned by columns
 	int selectedRowIndex;
+	
+	int playheadRow;
 };
 
 #endif

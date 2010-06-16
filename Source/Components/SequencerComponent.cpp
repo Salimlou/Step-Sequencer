@@ -20,7 +20,8 @@ tableListBox (0),
 totalRows (64),
 totalCols (16),
 selectedCell (0),
-selectedRowIndex (-1)
+selectedRowIndex (-1),
+playheadRow (5)
 {
 	addAndMakeVisible(tableListBox = new MyTableListBox (T("My Table List Box"), this));
 	tableListBox->setHeaderHeight (15);
@@ -67,6 +68,16 @@ void SequencerComponent::addTableColumn (const String& title, int ID)
 										  30,
 										  100,
 										  TableHeaderComponent::defaultFlags);	
+}
+
+int SequencerComponent::getPlayheadRow()
+{
+	return playheadRow;
+}
+
+void SequencerComponent::setPlayheadRow (int playheadRow_)
+{
+	playheadRow = playheadRow_;
 }
 
 // Component methods
@@ -192,29 +203,42 @@ void SequencerComponent::paintCell (Graphics& g,
 			isSelectedRow = true;
 		}
 		
+		bool isPlayheadRow = false;
+		if (cell->getRow() == playheadRow) {
+			isPlayheadRow = true;
+		}
+		
 		if (cell == selectedCell) {
 			g.fillAll (Colours::blue);
 		} else if (((rowNum) % 4 == 0) 
 				   && ((colNum % 4) == 0)) {
-			if (isSelectedRow) {
+			if (isPlayheadRow) {
+				g.fillAll (Colour::fromRGB(50, 140, 50));
+			} else if (isSelectedRow) {
 				g.fillAll (Colour::fromRGB(50, 50, 140));
 			} else {
 				g.fillAll (Colour::fromRGB(50, 50, 50));
 			}
 		} else if ((rowNum) % 4 == 0) {
-			if (isSelectedRow) {
+			if (isPlayheadRow) {
+				g.fillAll (Colour::fromRGB(30, 120, 30));
+			} else if (isSelectedRow) {
 				g.fillAll (Colour::fromRGB(30, 30, 120));
 			} else {
 				g.fillAll (Colour::fromRGB(30, 30, 30));
 			}
 		} else if ((colNum) % 4 == 0) {
-			if (isSelectedRow) {
+			if (isPlayheadRow) {
+				g.fillAll (Colour::fromRGB(30, 120, 30));
+			} else if (isSelectedRow) {
 				g.fillAll (Colour::fromRGB(30, 30, 120));
 			} else {
 				g.fillAll (Colour::fromRGB(30, 30, 30));
 			}
 		} else {
-			if (isSelectedRow) {
+			if (isPlayheadRow) {
+				g.fillAll (Colour::fromRGB(30, 100, 30));
+			} else if (isSelectedRow) {
 				g.fillAll (Colour::fromRGB(30, 30, 100));
 			} else {
 				g.fillAll (Colours::black);
