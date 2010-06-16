@@ -15,6 +15,7 @@
 class PluginAudioProcessor;
 class Cell;
 class MyTableListBox;
+class Sequencer;
 
 class SequencerComponent : 
 public Component,
@@ -49,12 +50,10 @@ public:
 
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
+	Sequencer* sequencer;
 	
-	const int totalRows;
-	const int totalCols;
 	MyTableListBox* tableListBox;
-	OwnedArray< OwnedArray<Cell> > columns;
-	Cell* selectedCell; // owned by columns
+	Cell* selectedCell; // owned by sequencer
 	int selectedRowIndex;
 	
 	int playheadRow;

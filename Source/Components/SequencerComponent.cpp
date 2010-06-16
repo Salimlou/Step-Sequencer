@@ -10,46 +10,29 @@
 #include "Cell.h"
 #include "PluginAudioProcessor.h"
 #include "MyTableListBox.h"
+#include "Sequencer.h"
 
 #include "SequencerComponent.h"
 
-SequencerComponent::SequencerComponent(PluginAudioProcessor* pluginAudioProcessor_) :
+SequencerComponent::SequencerComponent (PluginAudioProcessor* pluginAudioProcessor_) :
 Component ("SequencerComponent"),
 pluginAudioProcessor (pluginAudioProcessor_),
+sequencer (0),
 tableListBox (0),
-totalRows (64),
-totalCols (16),
 selectedCell (0),
 selectedRowIndex (-1),
 playheadRow (5)
 {
+	sequencer = pluginAudioProcessor->getSequencer();
+	
 	addAndMakeVisible(tableListBox = new MyTableListBox (T("My Table List Box"), this));
 	tableListBox->setHeaderHeight (15);
 	tableListBox->setRowHeight (15);
 	tableListBox->getHeader()->setStretchToFitActive (true);
 	
-	int i = 0;
-	for (i = 0; i < totalCols; i++) {
-		OwnedArray<Cell>* col;
-		columns.add(col = new OwnedArray<Cell>);
+	for (int i = 0; i <= sequencer->getTotalCols(); i++) {
 		addTableColumn (i < 1 ? String::empty : String(i - 1), i + 1);
-		
-		for (int j = 0; j < totalRows; j++) {
-			Cell* cell;
-			col->add (cell = new Cell (j, i));
-			if (i != 0) {
-				Cell* westCell = columns.getUnchecked(i - 1)->getUnchecked(j);
-				cell->setWestCell (westCell);
-				westCell->setEastCell (cell);
-			}
-			if (j != 0) {
-				Cell* northCell = col->getUnchecked (j - 1);
-				cell->setNorthCell (northCell);
-				northCell->setSouthCell (cell);
-			}
-		}
 	}
-	addTableColumn (String(i - 1), i + 1);
 	
 	setSize (600, 400);
 	setWantsKeyboardFocus (true);
@@ -169,7 +152,7 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 // TableListBoxModel methods
 int SequencerComponent::getNumRows()
 {
-	return totalRows;	
+	return sequencer->getTotalRows();
 }
 
 void SequencerComponent::paintRowBackground (Graphics& g,
@@ -191,11 +174,10 @@ void SequencerComponent::paintCell (Graphics& g,
 	if (colNum == -1) {
 		g.fillAll (Colours::lightgrey);
 		g.drawText(String(rowNum), 0, 0, width, height, Justification::centred, false);
-	} else if (rowNum >= totalRows) {
+	} else if (rowNum >= sequencer->getTotalRows()) {
 		g.fillAll (Colours::black);
 	} else {
-		OwnedArray<Cell>* col = columns[colNum];
-		Cell* cell = col->getUnchecked (rowNum);
+		Cell* cell = sequencer->getCellAt (rowNum, colNum);
 
 		bool isSelectedRow = false;
 		if ((selectedCell != 0) 
@@ -298,8 +280,7 @@ void SequencerComponent::cellClicked (int rowNumber, int columnId, const MouseEv
 	
 	if (rowNum < 0 || colNum < 0) return;
 	
-	OwnedArray<Cell>* col = columns[colNum];
-	Cell* cell = col->getUnchecked (rowNum);
+	Cell* cell = sequencer->getCellAt (rowNum, colNum);
 	
 	selectedCell = cell;
 	

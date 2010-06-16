@@ -14,6 +14,7 @@
 #include "JucePluginCharacteristics.h"
 
 class CustomPlayHead;
+class Sequencer;
 
 class PluginAudioProcessor : public AudioProcessor
 {
@@ -22,6 +23,8 @@ public:
     ~PluginAudioProcessor();
 
 	void setCustomPlayHead (CustomPlayHead* customPlayHead_);
+	Sequencer* getSequencer();
+	void setSequencer (Sequencer* sequencer_);
 	
 	// AudioProcessor methods
     void prepareToPlay (double sampleRate, int samplesPerBlock);
@@ -57,6 +60,8 @@ public:
 	
 	//--------------------------------------------------------------------------
 	AudioPlayHead::CurrentPositionInfo lastPosInfo;
+
+	Sequencer* sequencer;	
 	
     juce_UseDebuggingNewOperator
 

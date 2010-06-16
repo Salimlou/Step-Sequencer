@@ -10,7 +10,6 @@
 #ifndef CustomPlayHead_H
 #define CustomPlayHead_H
 
-#include "CustomPlayHead.h"
 #include "AudioProcessorCallback.h"
 
 #include "JuceHeader.h"

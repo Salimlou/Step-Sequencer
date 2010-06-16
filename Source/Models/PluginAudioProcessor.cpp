@@ -9,21 +9,35 @@
 
 #include "PluginAudioProcessorEditor.h"
 #include "CustomPlayHead.h"
+#include "Sequencer.h"
 
 #include "PluginAudioProcessor.h"
 
 PluginAudioProcessor::PluginAudioProcessor() :
-customPlayHead (0)
+customPlayHead (0),
+sequencer (0)
 {
+	sequencer = new Sequencer (this);
 }
 
 PluginAudioProcessor::~PluginAudioProcessor()
 {
+	delete sequencer;
 }
 
 void PluginAudioProcessor::setCustomPlayHead (CustomPlayHead* customPlayHead_)
 {
 	customPlayHead = customPlayHead_;
+}
+
+Sequencer* PluginAudioProcessor::getSequencer()
+{
+	return sequencer;
+}
+
+void PluginAudioProcessor::setSequencer (Sequencer* sequencer_)
+{
+	sequencer = sequencer_;
 }
 
 // AudioProcessor methods
