@@ -19,15 +19,14 @@ class Sequencer;
 
 class SequencerComponent : 
 public Component,
-public TableListBoxModel
+public TableListBoxModel,
+public Timer
 {
 public:
 	SequencerComponent(PluginAudioProcessor* pluginAudioProcessor_);
 	~SequencerComponent();
 	
 	void addTableColumn (const String& title, int ID);
-	int getPlayheadRow();
-	void setPlayheadRow (int playheadRow_);
 	
 	// Component methods
 	virtual void paint (Graphics& g);
@@ -47,6 +46,9 @@ public:
 							bool rowIsSelected);	
     virtual void cellClicked (int rowNumber, int columnId, const MouseEvent& e);
 	virtual void selectedRowsChanged (int lastRowSelected);
+	
+	// Timer methods
+	virtual void timerCallback();
 
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
@@ -55,8 +57,6 @@ private:
 	MyTableListBox* tableListBox;
 	Cell* selectedCell; // owned by sequencer
 	int selectedRowIndex;
-	
-	int playheadRow;
 };
 
 #endif

@@ -12,9 +12,11 @@
 #include "Sequencer.h"
 
 Sequencer::Sequencer (PluginAudioProcessor* pluginAudioProcessor_) :
+AudioProcessorCallback (pluginAudioProcessor),
 pluginAudioProcessor (pluginAudioProcessor_),
 totalRows (64),
-totalCols (16)
+totalCols (16),
+playheadRow (5)
 {
 	int i = 0;
 	for (i = 0; i < totalCols; i++) {
@@ -58,6 +60,52 @@ Cell* Sequencer::getCellAt (int row, int col)
 	Cell* cell = column->getUnchecked (row);
 	return cell;
 }
+
+int Sequencer::getPlayheadRow()
+{
+	return playheadRow;
+}
+
+// AudioProcessorCallback methods
+void Sequencer::prepareToPlay (double sampleRate, int samplesPerBlock)
+{
+}
+
+void Sequencer::releaseResources()
+{
+}
+
+void Sequencer::processBlock (AudioSampleBuffer& buffer,
+							  MidiBuffer& midiMessages)
+{
+	AudioPlayHead::CurrentPositionInfo pos (pluginAudioProcessor->lastPosInfo);	
+
+	double ppq = pos.ppqPosition;
+/*
+	int numerator = pos.timeSigNumerator;
+	int denominator = pos.timeSigDenominator;
+	
+	const int ppqPerBar = (numerator * 4 / denominator); // e.g. 4 if 4/4
+	const double beats = (fmod (ppq, ppqPerBar) / ppqPerBar) * numerator;
+	
+	const int bar = ((int) ppq) / ppqPerBar + 1;
+	const int beat = ((int) beats) + 1;
+	const int ticks = ((int) (fmod (beats, 1.0) * 960.0));	
+*/
+	playheadRow = (int)((int)(ppq*4) % totalRows);
+	
+	if (pos.isPlaying) {
+		for (int i = 0; i < totalCols; i ++) {
+			Cell* cell = getCellAt (playheadRow, i);
+			int noteNumber = cell->getNoteNumber();
+			if (noteNumber != -1) {
+				static const MidiMessage m = MidiMessage::noteOn(1, noteNumber, 0.9f);
+				midiMessages.addEvent(m, 0);
+			}
+		}
+	}
+}
+
 
 
 

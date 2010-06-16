@@ -20,8 +20,7 @@ pluginAudioProcessor (pluginAudioProcessor_),
 sequencer (0),
 tableListBox (0),
 selectedCell (0),
-selectedRowIndex (-1),
-playheadRow (5)
+selectedRowIndex (-1)
 {
 	sequencer = pluginAudioProcessor->getSequencer();
 	
@@ -36,6 +35,8 @@ playheadRow (5)
 	
 	setSize (600, 400);
 	setWantsKeyboardFocus (true);
+	
+	startTimer (50);
 }
 
 SequencerComponent::~SequencerComponent()
@@ -53,15 +54,6 @@ void SequencerComponent::addTableColumn (const String& title, int ID)
 										  TableHeaderComponent::defaultFlags);	
 }
 
-int SequencerComponent::getPlayheadRow()
-{
-	return playheadRow;
-}
-
-void SequencerComponent::setPlayheadRow (int playheadRow_)
-{
-	playheadRow = playheadRow_;
-}
 
 // Component methods
 void SequencerComponent::paint (Graphics& g)
@@ -186,7 +178,7 @@ void SequencerComponent::paintCell (Graphics& g,
 		}
 		
 		bool isPlayheadRow = false;
-		if (cell->getRow() == playheadRow) {
+		if (cell->getRow() == sequencer->getPlayheadRow()) {
 			isPlayheadRow = true;
 		}
 		
@@ -289,6 +281,12 @@ void SequencerComponent::cellClicked (int rowNumber, int columnId, const MouseEv
 
 void SequencerComponent::selectedRowsChanged (int lastRowSelected)
 {
+}
+
+// Timer methods
+void SequencerComponent::timerCallback()
+{
+	repaint();
 }
 
 
