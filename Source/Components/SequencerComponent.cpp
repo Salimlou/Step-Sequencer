@@ -23,7 +23,7 @@ selectedCell (0),
 selectedRowIndex (-1)
 {
 	addAndMakeVisible(tableListBox = new MyTableListBox (T("My Table List Box"), this));
-	tableListBox->setHeaderHeight (0);
+	tableListBox->setHeaderHeight (15);
 	tableListBox->setRowHeight (15);
 	tableListBox->getHeader()->setStretchToFitActive (true);
 	
@@ -31,7 +31,7 @@ selectedRowIndex (-1)
 	for (i = 0; i < totalCols; i++) {
 		OwnedArray<Cell>* col;
 		columns.add(col = new OwnedArray<Cell>);
-		addTableColumn (String(i), i + 1);
+		addTableColumn (i < 1 ? String::empty : String(i - 1), i + 1);
 		
 		for (int j = 0; j < totalRows; j++) {
 			Cell* cell;
@@ -48,7 +48,7 @@ selectedRowIndex (-1)
 			}
 		}
 	}
-	addTableColumn (String(i), i + 1);
+	addTableColumn (String(i - 1), i + 1);
 	
 	setSize (600, 400);
 	setWantsKeyboardFocus (true);
@@ -101,11 +101,14 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 	} else if (key.getKeyCode() == KeyPress::spaceKey) {
 		selectedCell->setChecked (true);
 		newSelectedCell = selectedCell->getSouthCell();
+	} else if (key.getKeyCode() == KeyPress::deleteKey) {
+		selectedCell->setChecked (false);
+		newSelectedCell = selectedCell->getSouthCell();
 	} 
 
 	if (newSelectedCell != 0) {
 		selectedCell = newSelectedCell;
-		tableListBox->selectRow(selectedCell->getRow() + 1, false, true);
+		tableListBox->selectRow(selectedCell->getRow(), false, true);
 		repaint();	
 	}
 	
@@ -126,7 +129,7 @@ void SequencerComponent::paintRowBackground (Graphics& g,
 	if (rowIsSelected) {
 		g.fillAll (Colours::darkblue);
 	} else {
-		if ((rowNumber - 1) % 4 == 0) {
+		if ((rowNumber) % 4 == 0) {
 			g.fillAll (Colour::fromRGB (50, 50, 50));
 		} else {
 			g.fillAll (Colours::black);
@@ -140,15 +143,10 @@ void SequencerComponent::paintCell (Graphics& g,
 									int width, int height,
 									bool rowIsSelected)
 {
-	int rowNum = rowNumber - 1;
+	int rowNum = rowNumber;
 	int colNum = columnId - 2;
 	
-	if (rowNum == -1 & colNum == -1) {
-		g.fillAll (Colours::lightgrey);
-	} else if (rowNum == -1) {
-		g.fillAll (Colours::lightgrey);
-		g.drawText(String(colNum), 0, 0, width, height, Justification::centred, false);
-	} else if (colNum == -1) {
+	if (colNum == -1) {
 		g.fillAll (Colours::lightgrey);
 		g.drawText(String(rowNum), 0, 0, width, height, Justification::centred, false);
 	} else {
@@ -168,7 +166,7 @@ void SequencerComponent::paintCell (Graphics& g,
 
 void SequencerComponent::cellClicked (int rowNumber, int columnId, const MouseEvent& e)
 {
-	int rowNum = rowNumber - 1;
+	int rowNum = rowNumber;
 	int colNum = columnId - 2;
 	
 	if (rowNum < 0 || colNum < 0) return;
@@ -183,53 +181,6 @@ void SequencerComponent::cellClicked (int rowNumber, int columnId, const MouseEv
 
 void SequencerComponent::selectedRowsChanged (int lastRowSelected)
 {
-/*
-	if (!selectedCell) {
-		selectedRowIndex = lastRowSelected;
-		return;
-	}
-	
-	if (lastRowSelected == 0) {
-		SparseSet<int> ss;
-		ss.addRange (Range<int>(1, 1));
-		tableListBox->setSelectedRows(ss, true);
-		return;
-	}
-	
-	Cell* newSelectedCell = selectedCell;
-	if (lastRowSelected > selectedRowIndex) {
-		for (int i = 0; i < (lastRowSelected - selectedRowIndex); i++) {
-			if (newSelectedCell->getSouthCell() == 0) break;
-			newSelectedCell = newSelectedCell->getSouthCell();
-		}
-	} else {
-		for (int i = 0; i < (selectedRowIndex - lastRowSelected); i++) {
-			if (newSelectedCell->getNorthCell() == 0) break;
-			newSelectedCell = newSelectedCell->getNorthCell();
-		}
-	}
-	if (newSelectedCell != 0) {
-		selectedCell = newSelectedCell;
-	}
-	selectedRowIndex = lastRowSelected;
-	tableListBox->scrollToEnsureRowIsOnscreen (lastRowSelected);
-	repaint();	
- */
-}
-
-void SequencerComponent::deleteKeyPressed (int lastRowSelected)
-{
-	selectedCell->setChecked (false);
-	
-/*
-	int nextRow = tableListBox->getSelectedRow(0) + 1;
-	nextRow = jmin(nextRow, tableListBox->getNumRows() - 1);
-	SparseSet<int> ss;
-	ss.addRange (Range<int>(nextRow, 1));
-	tableListBox->setSelectedRows(ss, true);
-*/
- 
-	repaint();	
 }
 
 

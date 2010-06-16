@@ -44,7 +44,6 @@ public:
 							bool rowIsSelected);	
     virtual void cellClicked (int rowNumber, int columnId, const MouseEvent& e);
 	virtual void selectedRowsChanged (int lastRowSelected);
-    virtual void deleteKeyPressed (int lastRowSelected);
 	
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
