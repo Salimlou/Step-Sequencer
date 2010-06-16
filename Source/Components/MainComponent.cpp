@@ -1,12 +1,13 @@
 /*
  *  MainComponent.cpp
- *  audio_playhead4
+ *  midi_sequencer1
  *
  *  Created by Matt Sonic on 5/4/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
  *
  */
 
+#include "SequencerComponent.h"
 #include "PluginAudioProcessor.h"
 
 #include "MainComponent.h"
@@ -14,10 +15,13 @@
 MainComponent::MainComponent (PluginAudioProcessor* pluginAudioProcessor_) :
 Component ("MainComponent"),
 pluginAudioProcessor (pluginAudioProcessor_),
-positionLabel (0)
+positionLabel (0),
+sequencerComponent (0)
 {
 	addAndMakeVisible (positionLabel = new Label ("positionLabel", "Position"));
 	positionLabel->setColour (Label::textColourId, Colours::blue);
+	
+	addAndMakeVisible (sequencerComponent = new SequencerComponent(pluginAudioProcessor));
 	
 	startTimer (50);
 }
@@ -35,7 +39,8 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
-	positionLabel->setBoundsInset (BorderSize (10));
+	positionLabel->setBounds(10, 10, getWidth() - 20, 50);
+	sequencerComponent->setBounds (10, 80, getWidth() - 20, getHeight() - 80);
 }
 
 // Timer methods

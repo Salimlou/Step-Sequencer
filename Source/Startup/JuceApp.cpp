@@ -1,6 +1,6 @@
 /*
  *  JuceApp.cpp
- *  audio_playhead4
+ *  midi_sequencer1
  *
  *  Created by Matt Sonic on 3/27/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -22,7 +22,7 @@ JuceApp::~JuceApp()
 
 void JuceApp::initialise (const String& commandLine)
 {
-	const String applicationName = "audio_playhead4";
+	const String applicationName = "midi_sequencer1";
 	const String fileNameSuffix("app");
 	const String folderName("SonicTransfer");
 	ApplicationProperties::getInstance()->setStorageParameters(applicationName,
@@ -31,7 +31,7 @@ void JuceApp::initialise (const String& commandLine)
 															   0,
 															   PropertiesFile::storeAsXML);
 	
-	standaloneFilterWindow = new StandaloneFilterWindow ("audio_playhead4", 
+	standaloneFilterWindow = new StandaloneFilterWindow ("midi_sequencer1", 
 														 Colours::lightgrey);
 	standaloneFilterWindow->setVisible (true);
 }
@@ -43,7 +43,7 @@ void JuceApp::shutdown()
 
 const String JuceApp::getApplicationName()
 {
-	return T("audio_playhead4");
+	return T("midi_sequencer1");
 }
 
 const String JuceApp::getApplicationVersion()

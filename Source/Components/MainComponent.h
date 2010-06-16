@@ -1,6 +1,6 @@
 /*
  *  MainComponent.h
- *  audio_playhead4
+ *  midi_sequencer1
  *
  *  Created by Matt Sonic on 5/4/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -13,6 +13,7 @@
 #include "JuceHeader.h"
 
 class PluginAudioProcessor;
+class SequencerComponent;
 
 class MainComponent : 
 public Component,
@@ -37,6 +38,8 @@ private:
 	PluginAudioProcessor* pluginAudioProcessor;
 	Label* positionLabel;	
 	AudioPlayHead::CurrentPositionInfo lastDisplayedPosition;
+	
+	SequencerComponent* sequencerComponent;
 };
 
 #endif

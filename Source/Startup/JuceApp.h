@@ -1,6 +1,6 @@
 /*
  *  JuceApp.h
- *  audio_playhead4
+ *  midi_sequencer1
  *
  *  Created by Matt Sonic on 3/27/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
