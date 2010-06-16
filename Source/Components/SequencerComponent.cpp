@@ -166,17 +166,6 @@ void SequencerComponent::paintRowBackground (Graphics& g,
 											 int width, int height,
 											 bool rowIsSelected)
 {
-/*
-	if (rowIsSelected) {
-		g.fillAll (Colours::darkblue);
-	} else {
-		if ((rowNumber) % 4 == 0) {
-			g.fillAll (Colour::fromRGB (50, 50, 50));
-		} else {
-			g.fillAll (Colours::black);
-		}
-	}	
- */
 }
 
 void SequencerComponent::paintCell (Graphics& g,
@@ -196,20 +185,40 @@ void SequencerComponent::paintCell (Graphics& g,
 	} else {
 		OwnedArray<Cell>* col = columns[colNum];
 		Cell* cell = col->getUnchecked (rowNum);
+
+		bool isSelectedRow = false;
+		if ((selectedCell != 0) 
+			&& (cell->getRow() == selectedCell->getRow())) {
+			isSelectedRow = true;
+		}
+		
 		if (cell == selectedCell) {
 			g.fillAll (Colours::blue);
-		} else if ((selectedCell != 0) 
-				   && (cell->getRow() == selectedCell->getRow())) {
-			g.fillAll (Colour::fromRGB(30, 30, 100));
 		} else if (((rowNum) % 4 == 0) 
 				   && ((colNum % 4) == 0)) {
-			g.fillAll (Colour::fromRGB(50, 50, 50));
+			if (isSelectedRow) {
+				g.fillAll (Colour::fromRGB(50, 50, 140));
+			} else {
+				g.fillAll (Colour::fromRGB(50, 50, 50));
+			}
 		} else if ((rowNum) % 4 == 0) {
-			g.fillAll (Colour::fromRGB(30, 30, 30));
+			if (isSelectedRow) {
+				g.fillAll (Colour::fromRGB(30, 30, 120));
+			} else {
+				g.fillAll (Colour::fromRGB(30, 30, 30));
+			}
 		} else if ((colNum) % 4 == 0) {
-			g.fillAll (Colour::fromRGB(30, 30, 30));
+			if (isSelectedRow) {
+				g.fillAll (Colour::fromRGB(30, 30, 120));
+			} else {
+				g.fillAll (Colour::fromRGB(30, 30, 30));
+			}
 		} else {
-			g.fillAll (Colours::black);
+			if (isSelectedRow) {
+				g.fillAll (Colour::fromRGB(30, 30, 100));
+			} else {
+				g.fillAll (Colours::black);
+			}
 		}
 		
 		String noteString;
