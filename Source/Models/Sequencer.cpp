@@ -16,7 +16,9 @@ AudioProcessorCallback (pluginAudioProcessor),
 pluginAudioProcessor (pluginAudioProcessor_),
 totalRows (64),
 totalCols (16),
-playheadRow (5)
+playheadRow (0),
+lastPlayheadRow (-1),
+speed (4)
 {
 	int i = 0;
 	for (i = 0; i < totalCols; i++) {
@@ -67,8 +69,9 @@ int Sequencer::getPlayheadRow()
 }
 
 // AudioProcessorCallback methods
-void Sequencer::prepareToPlay (double sampleRate, int samplesPerBlock)
+void Sequencer::prepareToPlay (double sampleRate_, int samplesPerBlock)
 {
+	sampleRate = sampleRate_;
 }
 
 void Sequencer::releaseResources()
@@ -80,8 +83,13 @@ void Sequencer::processBlock (AudioSampleBuffer& buffer,
 {
 	AudioPlayHead::CurrentPositionInfo pos (pluginAudioProcessor->lastPosInfo);	
 
+	if (! pos.isPlaying) {
+		return;
+	}
+	
 	double ppq = pos.ppqPosition;
-/*
+
+	/*
 	int numerator = pos.timeSigNumerator;
 	int denominator = pos.timeSigDenominator;
 	
@@ -91,16 +99,29 @@ void Sequencer::processBlock (AudioSampleBuffer& buffer,
 	const int bar = ((int) ppq) / ppqPerBar + 1;
 	const int beat = ((int) beats) + 1;
 	const int ticks = ((int) (fmod (beats, 1.0) * 960.0));	
-*/
-	playheadRow = (int)((int)(ppq*4) % totalRows);
+	*/
+	 
+	double playheadRowPrecise = fmod (ppq * speed, totalRows);
+	playheadRow = (int)playheadRowPrecise;
 	
-	if (pos.isPlaying) {
-		for (int i = 0; i < totalCols; i ++) {
+	if (playheadRow != lastPlayheadRow) {
+
+		lastPlayheadRow = playheadRow;
+		
+		double beatsPerSec = pos.bpm * speed / 60.0;
+		double secPerBeat = 1.0 / beatsPerSec;	
+
+		double playheadOffset = playheadRowPrecise - playheadRow;
+		int playheadOffsetSamples = playheadOffset * secPerBeat * sampleRate;
+		playheadOffsetSamples = jmax (buffer.getNumSamples() - playheadOffsetSamples - 1, 0);
+		
+		for (int i = 0; i < totalCols; i++) {
 			Cell* cell = getCellAt (playheadRow, i);
 			int noteNumber = cell->getNoteNumber();
 			if (noteNumber != -1) {
-				static const MidiMessage m = MidiMessage::noteOn(1, noteNumber, 0.9f);
-				midiMessages.addEvent(m, 0);
+				MidiMessage m = MidiMessage::noteOn(1, noteNumber, 0.9f);
+				//midiMessages.addEvent (m, 0);
+				midiMessages.addEvent (m, playheadOffsetSamples);
 			}
 		}
 	}

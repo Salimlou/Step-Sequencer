@@ -36,7 +36,7 @@ selectedRowIndex (-1)
 	setSize (600, 400);
 	setWantsKeyboardFocus (true);
 	
-	startTimer (50);
+	startTimer (250);
 }
 
 SequencerComponent::~SequencerComponent()

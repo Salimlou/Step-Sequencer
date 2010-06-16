@@ -142,7 +142,11 @@ void PluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+
+	setLatencySamples (0.0115 * sampleRate);
+	
 	if (customPlayHead != 0) customPlayHead->prepareToPlay (sampleRate, samplesPerBlock);
+	if (sequencer != 0) sequencer->prepareToPlay (sampleRate, samplesPerBlock);
 }
 
 void PluginAudioProcessor::releaseResources()
@@ -150,6 +154,7 @@ void PluginAudioProcessor::releaseResources()
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 	if (customPlayHead != 0) customPlayHead->releaseResources();
+	if (sequencer != 0) sequencer->releaseResources();
 }
 
 void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)

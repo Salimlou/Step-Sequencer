@@ -29,7 +29,7 @@ public:
 	int getPlayheadRow();
 
 	// AudioProcessorCallback methods
-	virtual void prepareToPlay (double sampleRate, int samplesPerBlock);
+	virtual void prepareToPlay (double sampleRate_, int samplesPerBlock);
     virtual void releaseResources();
     virtual void processBlock (AudioSampleBuffer& buffer, 
 							   MidiBuffer& midiMessages);	
@@ -37,11 +37,16 @@ public:
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
 
+	double sampleRate;
+	
 	const int totalRows;
 	const int totalCols;
 	OwnedArray< OwnedArray<Cell> > columns;
 
 	int playheadRow;
+	int lastPlayheadRow;
+	
+	int speed; // playback speed multiplier
 };
 
 #endif
