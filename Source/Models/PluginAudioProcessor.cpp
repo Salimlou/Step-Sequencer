@@ -1,6 +1,6 @@
 /*
  *  PluginAudioProcessor.cpp
- *  midi_sequencer1
+ *  syzygrd_sequencer1
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.

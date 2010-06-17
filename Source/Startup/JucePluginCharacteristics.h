@@ -1,6 +1,6 @@
 /*
  *  JucePluginCharacteristics.h
- *  midi_sequencer1
+ *  syzygrd_sequencer1
  *
  *  Created by Matt Sonic on 5/2/10.
  *  Copyright 2010 SonicTransfer. All rights reserved.
@@ -14,8 +14,8 @@
 #define JucePlugin_Build_AU     0
 #define JucePlugin_Build_RTAS   0
 
-#define JucePlugin_Name                 "midi_sequencer1"
-#define JucePlugin_Desc                 "midi_sequencer1"
+#define JucePlugin_Name                 "syzygrd_sequencer1"
+#define JucePlugin_Desc                 "syzygrd_sequencer1"
 #define JucePlugin_Manufacturer         "SonicTransfer"
 #define JucePlugin_ManufacturerCode     'stpt'
 #define JucePlugin_PluginCode           'Stpt'

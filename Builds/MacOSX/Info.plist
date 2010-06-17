@@ -7,9 +7,9 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.SonicTransfer.midi_sequencer1</string>
+	<string>com.SonicTransfer.syzygrd_sequencer1</string>
 	<key>CFBundleName</key>
-	<string>midi_sequencer1</string>
+	<string>syzygrd_sequencer1</string>
 	<key>CFBundlePackageType</key>
 	<string>TDMw</string>
 	<key>CFBundleSignature</key>
