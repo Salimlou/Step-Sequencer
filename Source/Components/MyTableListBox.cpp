@@ -29,7 +29,8 @@ bool MyTableListBox::keyPressed (const KeyPress& key)
 		|| key.isKeyCode (KeyPress::homeKey)
 		|| key.isKeyCode (KeyPress::endKey)
 		|| key.isKeyCode (KeyPress::deleteKey)
-		|| key.isKeyCode (KeyPress::tabKey))
+		|| key.isKeyCode (KeyPress::tabKey)
+		|| key.isKeyCode (KeyPress::spaceKey))
 	{
 		return false;
 	}

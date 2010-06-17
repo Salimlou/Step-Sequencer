@@ -20,7 +20,8 @@ pluginAudioProcessor (pluginAudioProcessor_),
 sequencer (0),
 tableListBox (0),
 selectedCell (0),
-selectedRowIndex (-1)
+selectedRowIndex (-1),
+lastPlayheadRow (-1)
 {
 	sequencer = pluginAudioProcessor->getSequencer();
 	
@@ -36,7 +37,9 @@ selectedRowIndex (-1)
 	setSize (600, 400);
 	setWantsKeyboardFocus (true);
 	
-	startTimer (250);
+	setAlwaysOnTop (true);
+	
+	startTimer (20);
 }
 
 SequencerComponent::~SequencerComponent()
@@ -71,6 +74,10 @@ void SequencerComponent::resized()
 
 bool SequencerComponent::keyPressed (const KeyPress& key)
 {
+	if (key.getKeyCode() == KeyPress::spaceKey) {
+		return false;
+	}
+	
 	Cell* newSelectedCell = 0;
 	if (key.getKeyCode() == KeyPress::leftKey) {
 		newSelectedCell = selectedCell->getWestCell();
@@ -87,7 +94,6 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 	} else if (key.getKeyCode() == KeyPress::deleteKey) {
 		selectedCell->setNoteNumber (-1);
 		newSelectedCell = selectedCell->getSouthCell();
-	} else if (key.getKeyCode() == KeyPress::spaceKey) {
 	} else {
 		int newNoteNumber = 0;	
 		switch (key.getKeyCode()) {
@@ -286,7 +292,10 @@ void SequencerComponent::selectedRowsChanged (int lastRowSelected)
 // Timer methods
 void SequencerComponent::timerCallback()
 {
-	repaint();
+	if (lastPlayheadRow != sequencer->getPlayheadRow()) {
+		lastPlayheadRow = sequencer->getPlayheadRow();
+		repaint();
+	}
 }
 
 

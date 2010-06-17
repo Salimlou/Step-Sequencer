@@ -26,7 +26,7 @@ public:
 	// Component methods
 	virtual void paint (Graphics& g);
 	virtual void resized();
-
+	
 	// Timer methods
 	virtual void timerCallback();
 

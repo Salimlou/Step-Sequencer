@@ -57,6 +57,8 @@ private:
 	MyTableListBox* tableListBox;
 	Cell* selectedCell; // owned by sequencer
 	int selectedRowIndex;
+	
+	int lastPlayheadRow;
 };
 
 #endif

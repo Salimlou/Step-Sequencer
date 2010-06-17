@@ -21,7 +21,7 @@ standalone (false)
 	addAndMakeVisible (mainComponent = new MainComponent (pluginAudioProcessor));
 
 	addAndMakeVisible (resizer = new ResizableCornerComponent (this, &resizeLimits));	
-	resizeLimits.setSizeLimits (600, 400, 1200, 800);
+	resizeLimits.setSizeLimits (600, 400, 2400, 1600);
 	
 	addComponentListener (this);
 	
