@@ -29,6 +29,7 @@ lastPlayheadRow (-1)
 	tableListBox->setHeaderHeight (15);
 	tableListBox->setRowHeight (15);
 	tableListBox->getHeader()->setStretchToFitActive (true);
+	tableListBox->setMultipleSelectionEnabled (true);
 	
 	for (int i = 0; i <= sequencer->getTotalCols(); i++) {
 		addTableColumn (i < 1 ? String::empty : String(i - 1), i + 1);
@@ -106,7 +107,8 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 		newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
 	} else if (keyCode == KeyPress::pageDownKey) {
 		newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
-	} else if (keyCode == KeyPress::deleteKey) {
+	} else if ((keyCode == KeyPress::deleteKey) ||
+		(keyCode == KeyPress::backspaceKey)) {
 		selectedCell->setNoteNumber (-1);
 		newSelectedCell = selectedCell->getSouthCell();
 	}
@@ -152,12 +154,14 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 	
 	if (newNoteNumber > 0) {
 		selectedCell->setNoteNumber(newNoteNumber);
-		newSelectedCell = selectedCell->getSouthCell();
+		newSelectedCell = selectedCell;
+		//newSelectedCell = selectedCell->getSouthCell();
 	}	
 	
 	if (newSelectedCell != 0) {
 		selectedCell = newSelectedCell;
-		tableListBox->selectRow(selectedCell->getRow(), false, true);
+		//tableListBox->selectRow(selectedCell->getRow(), false, true);
+		tableListBox->selectRowsBasedOnModifierKeys(selectedCell->getRow(), key.getModifiers());
 		if (selectedCell->getCol() == 0) {
 			tableListBox->scrollToEnsureColumnIsOnscreen(1);
 		} else {
@@ -199,11 +203,14 @@ void SequencerComponent::paintCell (Graphics& g,
 	} else {
 		Cell* cell = sequencer->getCellAt (rowNum, colNum);
 
+		/*
 		bool isSelectedRow = false;
 		if ((selectedCell != 0) 
 			&& (cell->getRow() == selectedCell->getRow())) {
 			isSelectedRow = true;
 		}
+		 */
+		bool isSelectedRow = rowIsSelected;
 		
 		bool isPlayheadRow = false;
 		if (cell->getRow() == sequencer->getPlayheadRow()) {
