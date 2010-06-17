@@ -11,6 +11,7 @@
 #include "PluginAudioProcessor.h"
 #include "MyTableListBox.h"
 #include "Sequencer.h"
+#include "CellComponent.h"
 
 #include "SequencerComponent.h"
 
@@ -22,6 +23,16 @@ lastPlayheadRow (-1)
 {
 	sequencer = pluginAudioProcessor->getSequencer();
 	
+	for (int i = 0; i < sequencer->getTotalRows(); i++) {
+		Array<CellComponent*>* row;
+		rows.add (row = new Array<CellComponent*>);
+		for (int j = 0; j < sequencer->getTotalCols(); j++) {
+			CellComponent* cell;
+			addAndMakeVisible (cell = new CellComponent (sequencer->getCellAt (i, j)));
+			row->add (cell);
+		}
+	}
+	
 	setSize (600, 400);
 	setWantsKeyboardFocus (true);
 	
@@ -32,6 +43,14 @@ lastPlayheadRow (-1)
 
 SequencerComponent::~SequencerComponent()
 {
+	deleteAllChildren();
+}
+
+CellComponent* SequencerComponent::getCellAt (int row_, int col_)
+{
+	Array<CellComponent*>* row = rows[row_];
+	CellComponent* cell = row->getUnchecked (col_);
+	return cell;
 }
 
 // Component methods
@@ -42,6 +61,15 @@ void SequencerComponent::paint (Graphics& g)
 
 void SequencerComponent::resized()
 {
+	float cellWidth = (float)(getWidth() - 10) / sequencer->getTotalCols();
+	float cellHeight = (float)(getHeight() - 10) / sequencer->getTotalRows();
+	
+	for (int i = 0; i < sequencer->getTotalRows(); i++) {
+		for (int j = 0; j < sequencer->getTotalCols(); j++) {
+			CellComponent* cell = getCellAt (i, j);
+			cell->setBounds (j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+		}
+	}
 }
 
 bool SequencerComponent::keyPressed (const KeyPress& key)

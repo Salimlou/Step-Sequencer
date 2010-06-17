@@ -15,6 +15,7 @@
 class PluginAudioProcessor;
 class Cell;
 class Sequencer;
+class CellComponent;
 
 class SequencerComponent : 
 public Component,
@@ -23,6 +24,8 @@ public Timer
 public:
 	SequencerComponent(PluginAudioProcessor* pluginAudioProcessor_);
 	~SequencerComponent();
+	
+	CellComponent* getCellAt (int row, int col);
 	
 	// Component methods
 	virtual void paint (Graphics& g);
@@ -35,6 +38,8 @@ public:
 private:
 	PluginAudioProcessor* pluginAudioProcessor;
 	Sequencer* sequencer;
+	
+	OwnedArray< Array<CellComponent*> > rows;
 	
 	int lastPlayheadRow;
 };

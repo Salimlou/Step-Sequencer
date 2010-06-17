@@ -42,7 +42,7 @@ void MainComponent::paint (Graphics& g)
 void MainComponent::resized()
 {
 	positionLabel->setBounds (10, 10, getWidth() - 20, 50);
-	sequencerComponent->setBounds (10, 80, getWidth() - 20, getHeight() - 80);
+	sequencerComponent->setBounds (10, 80, getWidth() - 20, getHeight() - 90);
 }
 
 // Timer methods

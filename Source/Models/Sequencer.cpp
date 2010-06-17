@@ -14,7 +14,7 @@
 Sequencer::Sequencer (PluginAudioProcessor* pluginAudioProcessor_) :
 AudioProcessorCallback (pluginAudioProcessor),
 pluginAudioProcessor (pluginAudioProcessor_),
-totalRows (64),
+totalRows (10),
 totalCols (16),
 playheadRow (0),
 lastPlayheadRow (-1),

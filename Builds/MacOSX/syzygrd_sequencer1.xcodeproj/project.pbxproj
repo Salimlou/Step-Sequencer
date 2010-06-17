@@ -52,6 +52,8 @@
 		C9E0500811C969D10099DF10 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E0500611C969D10099DF10 /* Sequencer.cpp */; };
 		C9E0552011CAA8E50099DF10 /* SequencerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E0551F11CAA8E50099DF10 /* SequencerComponent.cpp */; };
 		C9E0552111CAA8E50099DF10 /* SequencerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E0551F11CAA8E50099DF10 /* SequencerComponent.cpp */; };
+		C9E0553A11CAA9F40099DF10 /* CellComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E0553911CAA9F40099DF10 /* CellComponent.cpp */; };
+		C9E0553B11CAA9F40099DF10 /* CellComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9E0553911CAA9F40099DF10 /* CellComponent.cpp */; };
 		CA4B0796F9761B49346E67CA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236A3C63C095F3E7D0CAB57 /* QuartzCore.framework */; };
 		F1987FCD17C063C4D768C1F7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4888E03EAF76109DC7ADA97 /* IOKit.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +104,8 @@
 		C9E0500611C969D10099DF10 /* Sequencer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sequencer.cpp; sourceTree = "<group>"; };
 		C9E0551E11CAA8E50099DF10 /* SequencerComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerComponent.h; sourceTree = "<group>"; };
 		C9E0551F11CAA8E50099DF10 /* SequencerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SequencerComponent.cpp; sourceTree = "<group>"; };
+		C9E0553811CAA9F40099DF10 /* CellComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellComponent.h; sourceTree = "<group>"; };
+		C9E0553911CAA9F40099DF10 /* CellComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CellComponent.cpp; sourceTree = "<group>"; };
 		D33D082C0DB010E0AB2BE898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9AECD02FA3BF8873B8969C4 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		E3C7EB89E3DDEFCBD0047DB6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -205,6 +209,8 @@
 				C9E04D1211C86C3F0099DF10 /* MyTableListBox.cpp */,
 				C9E0551E11CAA8E50099DF10 /* SequencerComponent.h */,
 				C9E0551F11CAA8E50099DF10 /* SequencerComponent.cpp */,
+				C9E0553811CAA9F40099DF10 /* CellComponent.h */,
+				C9E0553911CAA9F40099DF10 /* CellComponent.cpp */,
 			);
 			name = Components;
 			path = ../../Source/Components;
@@ -384,6 +390,7 @@
 				C9E04CCC11C8680B0099DF10 /* Cell.cpp in Sources */,
 				C9E04D1411C86C3F0099DF10 /* MyTableListBox.cpp in Sources */,
 				C9E0500811C969D10099DF10 /* Sequencer.cpp in Sources */,
+				C9E0553B11CAA9F40099DF10 /* CellComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +413,7 @@
 				C9E04CCB11C8680B0099DF10 /* Cell.cpp in Sources */,
 				C9E04D1311C86C3F0099DF10 /* MyTableListBox.cpp in Sources */,
 				C9E0500711C969D10099DF10 /* Sequencer.cpp in Sources */,
+				C9E0553A11CAA9F40099DF10 /* CellComponent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
