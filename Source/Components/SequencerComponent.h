@@ -41,7 +41,7 @@ private:
 	
 	OwnedArray< Array<CellComponent*> > rows;
 	
-	int lastPlayheadRow;
+	int lastPlayheadCol;
 };
 
 #endif

@@ -16,8 +16,8 @@ AudioProcessorCallback (pluginAudioProcessor),
 pluginAudioProcessor (pluginAudioProcessor_),
 totalRows (10),
 totalCols (16),
-playheadRow (0),
-lastPlayheadRow (-1),
+playheadCol (0),
+lastPlayheadCol (-1),
 speed (4)
 {
 	int i = 0;
@@ -63,9 +63,9 @@ Cell* Sequencer::getCellAt (int row, int col)
 	return cell;
 }
 
-int Sequencer::getPlayheadRow()
+int Sequencer::getPlayheadCol()
 {
-	return playheadRow;
+	return playheadCol;
 }
 
 // AudioProcessorCallback methods
@@ -101,22 +101,22 @@ void Sequencer::processBlock (AudioSampleBuffer& buffer,
 	const int ticks = ((int) (fmod (beats, 1.0) * 960.0));	
 	*/
 	 
-	double playheadRowPrecise = fmod (ppq * speed, totalRows);
-	playheadRow = (int)playheadRowPrecise;
+	double playheadColPrecise = fmod (ppq * speed, totalCols);
+	playheadCol = (int)playheadColPrecise;
 	
-	if (playheadRow != lastPlayheadRow) {
+	if (playheadCol != lastPlayheadCol) {
 
-		lastPlayheadRow = playheadRow;
+		lastPlayheadCol = playheadCol;
 		
 		double beatsPerSec = pos.bpm * speed / 60.0;
 		double secPerBeat = 1.0 / beatsPerSec;	
 
-		double playheadOffset = playheadRowPrecise - playheadRow;
+		double playheadOffset = playheadColPrecise - playheadCol;
 		int playheadOffsetSamples = playheadOffset * secPerBeat * sampleRate;
 		playheadOffsetSamples = jmax (buffer.getNumSamples() - playheadOffsetSamples - 1, 0);
 		
 		for (int i = 0; i < totalCols; i++) {
-			Cell* cell = getCellAt (playheadRow, i);
+			Cell* cell = getCellAt (i, playheadCol);
 			int noteNumber = cell->getNoteNumber();
 			if (noteNumber != -1) {
 				MidiMessage m = MidiMessage::noteOn(1, noteNumber, 0.9f);

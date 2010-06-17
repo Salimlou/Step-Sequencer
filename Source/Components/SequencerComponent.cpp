@@ -19,7 +19,7 @@ SequencerComponent::SequencerComponent (PluginAudioProcessor* pluginAudioProcess
 Component ("SequencerComponent"),
 pluginAudioProcessor (pluginAudioProcessor_),
 sequencer (0),
-lastPlayheadRow (-1)
+lastPlayheadCol (-1)
 {
 	sequencer = pluginAudioProcessor->getSequencer();
 	
@@ -57,6 +57,9 @@ CellComponent* SequencerComponent::getCellAt (int row_, int col_)
 void SequencerComponent::paint (Graphics& g)
 {
 	g.fillAll (Colours::black);	
+	g.setColour (Colour::fromRGB (100, 220, 250));
+	float cellWidth = (float)(getWidth() - 10) / sequencer->getTotalCols();
+	g.fillRect (lastPlayheadCol * cellWidth, 0.0f, cellWidth, (float)getHeight());
 }
 
 void SequencerComponent::resized()
@@ -80,8 +83,8 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 // Timer methods
 void SequencerComponent::timerCallback()
 {
-	if (lastPlayheadRow != sequencer->getPlayheadRow()) {
-		lastPlayheadRow = sequencer->getPlayheadRow();
+	if (lastPlayheadCol != sequencer->getPlayheadCol()) {
+		lastPlayheadCol = sequencer->getPlayheadCol();
 		repaint();
 	}
 }

@@ -26,7 +26,7 @@ public:
 	int getTotalRows();
 	int getTotalCols();
 	Cell* getCellAt (int row, int col);
-	int getPlayheadRow();
+	int getPlayheadCol();
 
 	// AudioProcessorCallback methods
 	virtual void prepareToPlay (double sampleRate_, int samplesPerBlock);
@@ -43,8 +43,8 @@ private:
 	const int totalCols;
 	OwnedArray< OwnedArray<Cell> > columns;
 
-	int playheadRow;
-	int lastPlayheadRow;
+	int playheadCol;
+	int lastPlayheadCol;
 	
 	int speed; // playback speed multiplier
 };
