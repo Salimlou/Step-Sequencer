@@ -49,3 +49,5 @@ void StandaloneComponent::resized()
 	audioProcessorEditor->setBounds (0, 50, getWidth(), getHeight() - 50);
 }
 
+
+

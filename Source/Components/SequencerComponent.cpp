@@ -75,69 +75,94 @@ bool SequencerComponent::keyPressed (const KeyPress& key)
 		return false;
 	}
 	
+	// Handle movement
 	Cell* newSelectedCell = 0;
-	if (key.getKeyCode() == KeyPress::leftKey) {
-		newSelectedCell = selectedCell->getWestCell();
-	} else if (key.getKeyCode() == KeyPress::rightKey) {
-		newSelectedCell = selectedCell->getEastCell();
-	} else if (key.getKeyCode() == KeyPress::downKey) {
-		newSelectedCell = selectedCell->getSouthCell();
-	} else if (key.getKeyCode() == KeyPress::upKey) {
-		newSelectedCell = selectedCell->getNorthCell();
-	} else if (key.getKeyCode() == KeyPress::pageDownKey) {
-		newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
-	} else if (key.getKeyCode() == KeyPress::pageUpKey) {
-		newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
-	} else if (key.getKeyCode() == KeyPress::deleteKey) {
-		selectedCell->setNoteNumber (-1);
-		newSelectedCell = selectedCell->getSouthCell();
-	} else {
-		int newNoteNumber = 0;	
-		switch (key.getKeyCode()) {
-			case 'q':
-				newNoteNumber = 60; break;
-			case '2':
-				newNoteNumber = 61; break;
-			case 'w':
-				newNoteNumber = 62; break;
-			case '3':
-				newNoteNumber = 63; break;
-			case 'e':
-				newNoteNumber = 64; break;
-			case 'r':
-				newNoteNumber = 65; break;
-			case '5':
-				newNoteNumber = 66; break;
-			case 't':
-				newNoteNumber = 67; break;
-			case '6':
-				newNoteNumber = 68; break;
-			case 'y':
-				newNoteNumber = 69; break;
-			case '7':
-				newNoteNumber = 70; break;
-			case 'u':
-				newNoteNumber = 71; break;
-			case 'i':
-				newNoteNumber = 72; break;
-			case '9':
-				newNoteNumber = 73; break;
-			case 'o':
-				newNoteNumber = 74; break;
-			case '0':
-				newNoteNumber = 75; break;
-			case 'p':
-				newNoteNumber = 76; break;
+	int keyCode = key.getKeyCode();
+	if (keyCode == KeyPress::leftKey) {
+		if (key.getModifiers() == ModifierKeys::altModifier) {
+			newSelectedCell = selectedCell->getWestCell()->getWestCell()->getWestCell()->getWestCell();
+		} else {
+			newSelectedCell = selectedCell->getWestCell();
 		}
-		if (newNoteNumber > 0) {
-			selectedCell->setNoteNumber(newNoteNumber);
+	} else if (keyCode == KeyPress::rightKey) {
+		if (key.getModifiers() == ModifierKeys::altModifier) {
+			newSelectedCell = selectedCell->getEastCell()->getEastCell()->getEastCell()->getEastCell();
+		} else {
+			newSelectedCell = selectedCell->getEastCell();
+		}
+	} else if (keyCode == KeyPress::upKey) {
+		if (key.getModifiers() == ModifierKeys::altModifier) {
+			newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
+		} else {
+			newSelectedCell = selectedCell->getNorthCell();
+		}
+	} else if (keyCode == KeyPress::downKey) {
+		if (key.getModifiers() == ModifierKeys::altModifier) {
+			newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
+		} else {
 			newSelectedCell = selectedCell->getSouthCell();
 		}
+	} else if (keyCode == KeyPress::pageUpKey) {
+		newSelectedCell = selectedCell->getNorthCell()->getNorthCell()->getNorthCell()->getNorthCell();
+	} else if (keyCode == KeyPress::pageDownKey) {
+		newSelectedCell = selectedCell->getSouthCell()->getSouthCell()->getSouthCell()->getSouthCell();
+	} else if (keyCode == KeyPress::deleteKey) {
+		selectedCell->setNoteNumber (-1);
+		newSelectedCell = selectedCell->getSouthCell();
 	}
+	
+	// Handle notation
+	int newNoteNumber = 0;	
+	switch (key.getKeyCode()) {
+		case 'q':
+			newNoteNumber = 60; break;
+		case '2':
+			newNoteNumber = 61; break;
+		case 'w':
+			newNoteNumber = 62; break;
+		case '3':
+			newNoteNumber = 63; break;
+		case 'e':
+			newNoteNumber = 64; break;
+		case 'r':
+			newNoteNumber = 65; break;
+		case '5':
+			newNoteNumber = 66; break;
+		case 't':
+			newNoteNumber = 67; break;
+		case '6':
+			newNoteNumber = 68; break;
+		case 'y':
+			newNoteNumber = 69; break;
+		case '7':
+			newNoteNumber = 70; break;
+		case 'u':
+			newNoteNumber = 71; break;
+		case 'i':
+			newNoteNumber = 72; break;
+		case '9':
+			newNoteNumber = 73; break;
+		case 'o':
+			newNoteNumber = 74; break;
+		case '0':
+			newNoteNumber = 75; break;
+		case 'p':
+			newNoteNumber = 76; break;
+	}
+	
+	if (newNoteNumber > 0) {
+		selectedCell->setNoteNumber(newNoteNumber);
+		newSelectedCell = selectedCell->getSouthCell();
+	}	
 	
 	if (newSelectedCell != 0) {
 		selectedCell = newSelectedCell;
 		tableListBox->selectRow(selectedCell->getRow(), false, true);
+		if (selectedCell->getCol() == 0) {
+			tableListBox->scrollToEnsureColumnIsOnscreen(1);
+		} else {
+			tableListBox->scrollToEnsureColumnIsOnscreen(selectedCell->getCol() + 2);
+		}
 		repaint();	
 	}
 	
