@@ -39,7 +39,7 @@ lastPlayheadRow (-1)
 	
 	setAlwaysOnTop (true);
 	
-	startTimer (20);
+	startTimer (50);
 }
 
 SequencerComponent::~SequencerComponent()
@@ -51,8 +51,8 @@ void SequencerComponent::addTableColumn (const String& title, int ID)
 {
 	tableListBox->getHeader()->addColumn (title,
 										  ID,
-										  20,
-										  30,
+										  40,
+										  40,
 										  100,
 										  TableHeaderComponent::defaultFlags);	
 }
@@ -61,9 +61,6 @@ void SequencerComponent::addTableColumn (const String& title, int ID)
 // Component methods
 void SequencerComponent::paint (Graphics& g)
 {
-	g.setGradientFill(ColourGradient (Colours::lightgrey, 0, 0,
-									  Colours::white, 0, getHeight(), 
-									  false));
 	g.fillAll();	
 }
 
@@ -190,12 +187,29 @@ void SequencerComponent::paintCell (Graphics& g,
 		
 		if (cell == selectedCell) {
 			g.fillAll (Colours::blue);
+		} else if (((rowNum) % 16 == 0) 
+				   && ((colNum % 4) == 0)) {
+			if (isPlayheadRow) {
+				g.fillAll (Colour::fromRGB(70, 160, 100));
+			} else if (isSelectedRow) {
+				g.fillAll (Colour::fromRGB(70, 100, 160));
+			} else {
+				g.fillAll (Colour::fromRGB(70, 70, 70));
+			}
 		} else if (((rowNum) % 4 == 0) 
 				   && ((colNum % 4) == 0)) {
 			if (isPlayheadRow) {
 				g.fillAll (Colour::fromRGB(50, 140, 50));
 			} else if (isSelectedRow) {
 				g.fillAll (Colour::fromRGB(50, 50, 140));
+			} else {
+				g.fillAll (Colour::fromRGB(50, 50, 50));
+			}
+		} else if ((rowNum) % 16 == 0) {
+			if (isPlayheadRow) {
+				g.fillAll (Colour::fromRGB(50, 140, 80));
+			} else if (isSelectedRow) {
+				g.fillAll (Colour::fromRGB(50, 80, 140));
 			} else {
 				g.fillAll (Colour::fromRGB(50, 50, 50));
 			}

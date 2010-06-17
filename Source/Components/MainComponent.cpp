@@ -23,6 +23,8 @@ sequencerComponent (0)
 	
 	addAndMakeVisible (sequencerComponent = new SequencerComponent(pluginAudioProcessor));
 	
+	setOpaque (true);
+	
 	startTimer (50);
 }
 
