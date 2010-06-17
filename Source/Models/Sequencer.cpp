@@ -20,23 +20,22 @@ playheadCol (0),
 lastPlayheadCol (-1),
 speed (4)
 {
-	int i = 0;
-	for (i = 0; i < totalCols; i++) {
-		OwnedArray<Cell>* col;
-		columns.add(col = new OwnedArray<Cell>);
+	for (int i = 0; i < totalRows; i++) {
+		OwnedArray<Cell>* row;
+		rows.add(row = new OwnedArray<Cell>);
 		
-		for (int j = 0; j < totalRows; j++) {
+		for (int j = 0; j < totalCols; j++) {
 			Cell* cell;
-			col->add (cell = new Cell (j, i));
+			row->add (cell = new Cell (i, j));
 			if (i != 0) {
-				Cell* westCell = columns.getUnchecked(i - 1)->getUnchecked(j);
-				cell->setWestCell (westCell);
-				westCell->setEastCell (cell);
-			}
-			if (j != 0) {
-				Cell* northCell = col->getUnchecked (j - 1);
+				Cell* northCell = rows.getUnchecked (i - 1)->getUnchecked(j);
 				cell->setNorthCell (northCell);
 				northCell->setSouthCell (cell);
+			}
+			if (j != 0) {
+				Cell* westCell = row->getUnchecked(j - 1);
+				cell->setWestCell (westCell);
+				westCell->setEastCell (cell);
 			}
 		}
 	}
@@ -56,10 +55,10 @@ int Sequencer::getTotalCols()
 	return totalCols;
 }
 
-Cell* Sequencer::getCellAt (int row, int col)
+Cell* Sequencer::getCellAt (int row_, int col_)
 {
-	OwnedArray<Cell>* column = columns[col];
-	Cell* cell = column->getUnchecked (row);
+	OwnedArray<Cell>* row = rows[row_];
+	Cell* cell = row->getUnchecked (col_);
 	return cell;
 }
 
@@ -115,7 +114,7 @@ void Sequencer::processBlock (AudioSampleBuffer& buffer,
 		int playheadOffsetSamples = playheadOffset * secPerBeat * sampleRate;
 		playheadOffsetSamples = jmax (buffer.getNumSamples() - playheadOffsetSamples - 1, 0);
 		
-		for (int i = 0; i < totalCols; i++) {
+		for (int i = 0; i < totalRows; i++) {
 			Cell* cell = getCellAt (i, playheadCol);
 			int noteNumber = cell->getNoteNumber();
 			if (noteNumber != -1) {

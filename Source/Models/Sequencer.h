@@ -41,7 +41,7 @@ private:
 	
 	const int totalRows;
 	const int totalCols;
-	OwnedArray< OwnedArray<Cell> > columns;
+	OwnedArray< OwnedArray<Cell> > rows;
 
 	int playheadCol;
 	int lastPlayheadCol;

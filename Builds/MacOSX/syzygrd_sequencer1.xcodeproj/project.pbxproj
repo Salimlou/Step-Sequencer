@@ -94,8 +94,6 @@
 		C969A4521194E7E70062CEEE /* TransportComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransportComponent.cpp; sourceTree = "<group>"; };
 		C969A4961194EB8E0062CEEE /* StandaloneComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandaloneComponent.h; sourceTree = "<group>"; };
 		C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StandaloneComponent.cpp; sourceTree = "<group>"; };
-		C9E04CC111C8669F0099DF10 /* SequencerComponent-old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SequencerComponent-old.h"; sourceTree = "<group>"; };
-		C9E04CC211C8669F0099DF10 /* SequencerComponent-old.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "SequencerComponent-old.cpp"; sourceTree = "<group>"; };
 		C9E04CC911C8680B0099DF10 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
 		C9E04CCA11C8680B0099DF10 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		C9E04D1111C86C3F0099DF10 /* MyTableListBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableListBox.h; sourceTree = "<group>"; };
@@ -203,8 +201,6 @@
 				C969A4521194E7E70062CEEE /* TransportComponent.cpp */,
 				C969A4961194EB8E0062CEEE /* StandaloneComponent.h */,
 				C969A4971194EB8E0062CEEE /* StandaloneComponent.cpp */,
-				C9E04CC111C8669F0099DF10 /* SequencerComponent-old.h */,
-				C9E04CC211C8669F0099DF10 /* SequencerComponent-old.cpp */,
 				C9E04D1111C86C3F0099DF10 /* MyTableListBox.h */,
 				C9E04D1211C86C3F0099DF10 /* MyTableListBox.cpp */,
 				C9E0551E11CAA8E50099DF10 /* SequencerComponent.h */,

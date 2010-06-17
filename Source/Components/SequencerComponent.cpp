@@ -58,14 +58,14 @@ void SequencerComponent::paint (Graphics& g)
 {
 	g.fillAll (Colours::black);	
 	g.setColour (Colour::fromRGB (100, 220, 250));
-	float cellWidth = (float)(getWidth() - 10) / sequencer->getTotalCols();
+	float cellWidth = (float)getWidth() / sequencer->getTotalCols();
 	g.fillRect (lastPlayheadCol * cellWidth, 0.0f, cellWidth, (float)getHeight());
 }
 
 void SequencerComponent::resized()
 {
-	float cellWidth = (float)(getWidth() - 10) / sequencer->getTotalCols();
-	float cellHeight = (float)(getHeight() - 10) / sequencer->getTotalRows();
+	float cellWidth = (float)getWidth() / sequencer->getTotalCols();
+	float cellHeight = (float)getHeight() / sequencer->getTotalRows();
 	
 	for (int i = 0; i < sequencer->getTotalRows(); i++) {
 		for (int j = 0; j < sequencer->getTotalCols(); j++) {
